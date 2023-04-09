@@ -1,28 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}
+Registro
+{% endblock titulo %}
 
 
-    <title>Signup</title>
-</head>
 
-<body>
 
-    <h1>Signup</h1>
+{% block contenido %}
+<h1>Registro de usuario</h1>
 
-    <h3 style={{estilo}}>{{estado}}</h3>
+{% if error1 %}
 
-    <hr>
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
+<div class="alert alert-dismissible alert-danger">
+    <strong>Ups!</strong> El nombre de usuario ya se encuentra registrado, prueba con otro =)
+    <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+</div>
+{% endif %}
 
-        <button type="submit">Suscribirse</button>
-    </form>
-</body>
+{% if error2 %}
 
-</html>
+<div class="alert alert-dismissible alert-danger">
+    <strong>Ups!</strong> Las contraseñas no coinciden, por favor verificalas e intenta nuevamente.
+    <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button type="submit">Suscribirse</button>
+</form>
+{% endblock contenido %}

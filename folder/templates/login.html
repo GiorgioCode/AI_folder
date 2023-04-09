@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}
+Ingresar
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+<h1>Ingresar</h1>
+{% if error %}
+
+<div class="alert alert-dismissible alert-danger">
+    <strong>Ups!</strong> Las credenciales de usuario no son correctas, por favor intentalo nuevamente.
+    <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+</div>
+{% endif %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Ingresar</button>
+</form>
+<hr>
+
+{% endblock contenido %}
