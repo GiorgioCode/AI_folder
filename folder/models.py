@@ -10,6 +10,6 @@ class Tareas(models.Model):
     fecha_limite = models.DateTimeField(null=True)
     importante = models.BooleanField(default=True)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return f'{self.usuario} - {self.titulo}'
