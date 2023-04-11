@@ -8,5 +8,14 @@ Mi Folder
 
 
 {% block contenido %}
-<h1>Mi Folder</h1>
+<h1>Mi Archivo</h1>
+<hr>
+<h2>Crear anotación</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Crear Anotacion</button>
+</form>
+
+
 {% endblock contenido %}

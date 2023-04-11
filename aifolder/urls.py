@@ -20,8 +20,10 @@ from folder import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('signup/', views.signup, name='signup'),
+    path('signup/', views.user_signup, name='signup'),
     path('folder/', views.folder, name='folder'),
-    path('login/', views.signin, name='login'),
-    path('logout/', views.signout, name="logout")
+    path('login/', views.user_signin, name='login'),
+    path('logout/', views.user_signout, name="logout"),
+    path('folder/anotar/', views.anotar, name='folder_anotar'),
+    path('mi_tasks/', views.mi_tasks, name='mi_tasks'),
 ]
