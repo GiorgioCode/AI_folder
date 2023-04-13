@@ -1,8 +1,14 @@
 from django.forms import ModelForm
-from .models import Tareas
+from .models import Task, Fav
 
 
-class AnotarForm(ModelForm):
+class TaskForm(ModelForm):
     class Meta:
-        model = Tareas
-        fields = ['titulo', 'descripcion', 'fecha_limite', 'importante']
+        model = Task
+        fields = ['titulo', 'descripcion', 'importante']
+
+
+class Fav(ModelForm):
+    class Meta:
+        model = Fav
+        fields = ['nombre', 'tipo', 'claves', 'url']

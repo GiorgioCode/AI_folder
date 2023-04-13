@@ -1,12 +1,12 @@
 from django.contrib import admin
-from .models import Tareas, Aplicacion, Apunte
+from .models import Task, Fav
+
 # Register your models here.
 
 
-class TareaAdmin(admin.ModelAdmin):
-    readonly_fields = ("creado",)
+class TaskAdmin(admin.ModelAdmin):
+    readonly_fields = ('creado', )
 
 
-admin.site.register(Tareas, TareaAdmin)
-admin.site.register(Apunte)
-admin.site.register(Aplicacion)
+admin.site.register(Task, TaskAdmin)
+admin.site.register(Fav)

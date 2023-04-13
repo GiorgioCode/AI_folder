@@ -3,35 +3,37 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Tareas(models.Model):
-    titulo = models.CharField(max_length=100)
-    descripcion = models.TextField(blank=True)
+class Task(models.Model):
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField(max_length=1000)
     creado = models.DateTimeField(auto_now_add=True)
-    fecha_limite = models.DateTimeField(null=True)
-    importante = models.BooleanField(default=True)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    importante = models.BooleanField(default=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.usuario} - {self.titulo}'
+        return f'{self.user} - {self.user}'
 
 
-class Aplicacion(models.Model):
+OPCIONES_TIPOS = (
+    ("Apunte", "Apunte"),
+    ("CheatSheet", "CheatSheet"),
+    ("Aplicacion", "Aplicacion"),
+    ("Modelo", "Modelo"),
+    ("Web", "Web"),
+    ("Varios", "Varios")
+)
+
+
+class Fav(models.Model):
     nombre = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=100)
+    tipo = models.CharField(
+        max_length=20,
+        choices=OPCIONES_TIPOS,
+        default='Aplicacion'
+    )
     claves = models.CharField(max_length=100)
     url = models.URLField(max_length=250)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.nombre} - {self.usuario}'
-
-
-class Apunte(models.Model):
-    nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
-    claves = models.CharField(max_length=100)
-    url = models.URLField(max_length=250)
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.nombre} - {self.usuario}'
+        return f'{self.user} - {self.user}'

@@ -1,17 +1,28 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block titulo %}
-Crear Tarea
+Crear Tarea / Anotacion
 {% endblock titulo %}
-{% block content %}
+{% block contenido %}
 
-<h1>Crear Tarea</h1>
+<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+    <div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+        <div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+            <div class="card border-primary" style="max-width: 100rem;">
+                <div class="card-header">Crear Tarea/Anotacion
+                </div>
+                <div class="card-body">
+                    {{error}}
+                    <form action="/create_task/" method="POST">
+                        {% csrf_token %}
+                        <table>
+                            {{form.as_table}}
+                        </table>
+                        <button>Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{{error}}
-<form action="/create_task/" method="POST">
-    {% csrf_token %}
-    {{form}}
-
-    <button>Guardar</button>
-</form>
-{% endblock %}
+    {% endblock contenido%}

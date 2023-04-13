@@ -1,20 +1,72 @@
-{% extends 'base.html' %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}
+Mis Apuntes
+{% endblock titulo %}
 
-<h1>tasks</h1>
+{%block contenido%}
+<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+    <div class="card border-white text-white bg-secondary" style="width: 90%">
+        <div class="card-header">Mis Tareas <a class="btn btn-primary mx-5" href="{%url 'create_task'%}">Nueva
+                Tarea</a></div>
+        <div class="card-body">
+            {% if tasks %}
+            {% for task in tasks %}
+            {% if task.importante %}
+            <div class="card text-primary bg-warning mb-3" style="width: 100%">
+                <div class="card-header">TAREA IMPORTANTE</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{task.titulo}}</h4>
+                    <p class="card-text">{{task.descripcion}}</p>
+                    <div class="d-flex d-flex justify-content-end align-items-center"> <span><a
+                                href="{% url 'detail_task' task.id %}" class="btn
+                                    btn-primary">Modificar</a></span>
+                        <span>
+                            <form action="{% url 'delete_task' task.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger">
+                                    Borrar
+                                </button>
+                            </form>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="card text-white bg-secondary mb-3" style="width: 100%;">
+                <div class="card-header">TAREA</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{task.titulo}}</h4>
+                    <p class="card-text">{{task.descripcion}}</p>
+                    <div class="d-flex d-flex justify-content-end align-items-center"> <span><a
+                                href="{% url 'detail_task' task.id %}" class="btn
+                            btn-primary">Modificar</a></span>
+                        <span>
+                            <form action="{% url 'delete_task' task.id %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-danger">
+                                    Borrar
+                                </button>
+                            </form>
+                        </span>
+                    </div>
+                </div>
+            </div>
 
-<ul>
-    {% for task in tasks %}
-    <li>
-        <a href="{% url 'task_detail' task.id %}">
-            {% if task.important %}
-            <strong>{{task.title}}</strong>
-            {% else %} {{task.id}} {{task.title}} {% endif %}
-            <p>{{task.description}}</p>
+            {% endif %}
 
-            {{task.datecompleted|date:'M j Y:i'}}
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+            {% endfor %}
+            {% else %}
+            <div class="card text-white bg-success mb-3" style="max-width: 100rem;">
+                <div class="card-header">TAREAS</div>
+                <div class="card-body">
+                    <h4 class="card-title">Buenas noticias!! no tienes tareas pendientes!!</h4>
+                </div>
+            </div>
+            {% endif %}
 
-{% endblock %}
+        </div>
+    </div>
+</div>
+
+{% endblock contenido%}

@@ -1,32 +1,25 @@
 {% extends 'base.html' %}
-
-{% block content %}
-
+{% block titulo %}
 {{task.title}}
+{% endblock titulo %}
+{% block contenido %}
+<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
 
-{{error}}
+    <div class="card bg-light mb-3" style="max-width: 100rem;">
+        <div class="card-header">Modificar Tarea</div>
+        <div class="card-body">
+            <h4 class="card-title">{{task.title}}</h4>
 
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
 
-    <button>
-        Update
-    </button>
-</form>
+                <button class="btn btn-primary">
+                    Modificar
+                </button>
+            </form>
 
-<form action="{% url 'complete_task' task.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-        complete
-    </button>
-</form>
+        </div>
+    </div>
 
-<form action="{% url 'delete_task' task.id %}" method="POST">
-    {% csrf_token %}
-    <button>
-        delete
-    </button>
-</form>
-
-{% endblock %}
+    {% endblock contenido%}

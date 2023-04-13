@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}
+Recomendar Favorito
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+    <h1>Recomendar Favorito/h1>
+        <form action="/create_note/" method="POST">
+            {% csrf_token %}
+
+            <button>Guardar</button>
+        </form>
+</div>
+
+{% endblock contenido %}

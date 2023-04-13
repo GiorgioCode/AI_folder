@@ -8,28 +8,37 @@ Registro
 
 
 {% block contenido %}
-<h1>Registro de usuario</h1>
 
-{% if error1 %}
+<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+    <div class="card text-white bg-secondary border-white" style="max-width: 50rem;">
+        <div class="card-header">Registro de Usuario</div>
+        <div class="card-body">
 
-<div class="alert alert-dismissible alert-danger">
-    <strong>Ups!</strong> El nombre de usuario ya se encuentra registrado, prueba con otro =)
-    <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+            {% if error1 %}
+
+            <div class="alert alert-dismissible alert-danger">
+                <strong>Ups!</strong> El nombre de usuario ya se encuentra registrado, prueba con otro =)
+                <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+            </div>
+            {% endif %}
+
+            {% if error2 %}
+
+            <div class="alert alert-dismissible alert-danger">
+                <strong>Ups!</strong> Las contraseñas no coinciden, por favor verificalas e intenta nuevamente.
+                <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+            </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+
+                <button type="submit">Suscribirse</button>
+            </form>
+
+        </div>
+    </div>
 </div>
-{% endif %}
 
-{% if error2 %}
 
-<div class="alert alert-dismissible alert-danger">
-    <strong>Ups!</strong> Las contraseñas no coinciden, por favor verificalas e intenta nuevamente.
-    <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
-</div>
-{% endif %}
-
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-
-    <button type="submit">Suscribirse</button>
-</form>
 {% endblock contenido %}

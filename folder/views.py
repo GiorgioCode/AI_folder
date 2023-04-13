@@ -6,16 +6,14 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
-from .forms import AnotarForm
+from .models import Task
+from .forms import TaskForm
 
 
 def home(request):
     return render(request, 'home.html')
 
-
-def folder(request):
-    return render(request, 'folder.html')
+# Manejo de usuarios
 
 
 def user_signup(request):
@@ -28,7 +26,7 @@ def user_signup(request):
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                return redirect('folder')
+                return redirect('home')
             except IntegrityError:
                 return render(request, 'user_signup.html', {'form': UserCreationForm, 'error1': True})
         else:
@@ -45,49 +43,98 @@ def user_signin(request):
             return render(request, 'user_login.html', {'form': AuthenticationForm, 'error': True})
         else:
             login(request, user)
-            return redirect('folder')
+            return redirect('home')
 
 
+@login_required
 def user_signout(request):
     logout(request)
     return redirect('home')
 
-
-def anotar(request):
-    return render(request, 'folder.html', {'form': AnotarForm})
+# Manejo de tareas
 
 
+@login_required
 def mi_tasks(request):
-    return render(request, 'mi_tasks.html')
+    tasks = Task.objects.filter(user=request.user)
+    return render(request, 'mi_tasks.html', {"tasks": tasks})
 
 
-def mi_apps(request):
-    return render(request, 'mi_apps.html')
+@login_required
+def task_detail(request, task_id):
+    if request.method == 'GET':
+        task = get_object_or_404(Task, pk=task_id, user=request.user)
+        form = TaskForm(instance=task)
+        return render(request, 'detail_task.html', {'task': task, 'form': form})
+    else:
+        try:
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            form = TaskForm(request.POST, instance=task)
+            form.save()
+            return redirect('mi_tasks')
+        except ValueError:
+            return render(request, 'detail_task.html', {'task': task, 'form': form, 'error': 'Error updating task.'})
 
 
-def mi_notes(request):
-    return render(request, 'mi_notes.html')
-
-
-def detail_task(request):
-    return render(request, 'detail_tasks')
-
-
-def detail_app(request):
-    return render(request, 'detail_app')
-
-
-def detail_note(request):
-    return render(request, 'detail_notes')
-
-
+@login_required
 def create_task(request):
-    return render(request, 'create_task')
+    if request.method == "GET":
+        return render(request, 'create_task.html', {"form": TaskForm})
+    else:
+        try:
+            form = TaskForm(request.POST)
+            new_task = form.save(commit=False)
+            new_task.user = request.user
+            new_task.save()
+            return redirect('mi_tasks')
+        except ValueError:
+            return render(request, 'create_task.html', {"form": TaskForm, "error": "Error creating task."})
 
 
-def create_app(request):
-    return render(request, 'create_app')
+@login_required
+def detail_task(request, task_id):
+    if request.method == 'GET':
+        task = get_object_or_404(Task, pk=task_id, user=request.user)
+        form = TaskForm(instance=task)
+        return render(request, 'detail_task.html', {'task': task, 'form': form})
+    else:
+        try:
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            form = TaskForm(request.POST, instance=task)
+            form.save()
+            return redirect('mi_tasks')
+        except ValueError:
+            return render(request, 'detail_task.html', {'task': task, 'form': form, 'error': 'Error updating task.'})
 
 
-def create_note(request):
-    return render(request, 'create_note')
+@login_required
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+    if request.method == 'POST':
+        task.save()
+        return redirect('mi_tasks')
+
+
+@login_required
+def delete_task(request, task_id):
+    task = get_object_or_404(Task, pk=task_id, user=request.user)
+    if request.method == 'POST':
+        task.delete()
+        return redirect('mi_tasks')
+# Manejo de favoritos
+
+
+def mi_favs(request):
+    return render(request, 'mi_favs.html')
+
+
+def detail_fav(request):
+    return render(request, 'detail_fav.html')
+
+
+def create_fav(request):
+    return render(request, 'create_fav.html')
+
+
+def explore(request):
+    return render(request, 'explore.html')

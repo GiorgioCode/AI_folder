@@ -8,21 +8,28 @@ Ingresar
 
 
 {% block contenido %}
-<h1>Ingresar</h1>
-{% if error %}
+<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
 
-<div class="alert alert-dismissible alert-danger">
-    <strong>Ups!</strong> Las credenciales de usuario no son correctas, por favor intentalo nuevamente.
-    <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+    <div class="card border-white text-white bg-secondary m-10" style="max-width: 20rem;">
+        <div class="card-header">LOGIN</div>
+        <div class="card-body">
+            {% if error %}
+
+            <div class="alert alert-dismissible alert-danger">
+                <strong>Ups!</strong> Las credenciales de usuario no son correctas, por favor intentalo nuevamente.
+                <button type="button" class="btn-close" data-bs-dismiss="alert">x</button>
+            </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+    </div>
 </div>
-{% endif %}
 
 
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Ingresar</button>
-</form>
-<hr>
+
 
 {% endblock contenido %}

@@ -119,7 +119,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+LOGIN_URL = '/user_login'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'aifolder.noreply@gmail.com'
+EMAIL_HOST_PASSWORD = 'aifolder2023'
+EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
+# https://www.youtube.com/watch?v=B3-AbVnls_8

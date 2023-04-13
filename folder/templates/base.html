@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css"
         integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
     <!--Se ha utilizado el template modificado de bootswatch llamado Sketchy (https://bootswatch.com/sketchy/)-->
     <title>{% block titulo %}
 
@@ -27,38 +28,40 @@
                 <div class="collapse navbar-collapse" id="navbarColor01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{%url 'home'%}">Inicio
-                                <span class="visually-hidden">(current)</span>
-                            </a>
+                            <a class="nav-link active" href="{%url 'home'%}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Explorar</a>
+                            <a class="nav-link" href="{%url 'explore'%}">Explorar</a>
                         </li>
 
 
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'folder'%}">Mi Folder</a>
+                            <a class="nav-link" href="{%url 'mi_tasks'%}">Mis Tareas</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'mi_favs'%}">Mis Favoritos</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false">Usuario</a>
-                            <div class="dropdown-menu">
+                            <a class="nav-link dropdown-toggle text-warning" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">{{user}}</a>
+                            <div class="dropdown-menu bg-warning">
                                 <a class="dropdown-item" href="#">Propiedades</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="{%url 'logout'%}">Cerrar sesion</a>
+                                <a class="dropdown-item text-danger" href="{%url 'user_logout'%}">Cerrar sesion</a>
                             </div>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'signup'%}">Registro</a>
+                            <a class="nav-link" href="{%url 'user_signup'%}">Registro</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'login'%}">Ingresar</a>
+                            <a class="nav-link" href="{%url 'user_login'%}">Ingresar</a>
                         </li>
                         {% endif %}
                     </ul>
-                    <form class="d-flex">
+                    <form class="d-flex d-flex flex-row justify-content-end">
                         <input class="form-control me-sm-2" type="search" placeholder="palabras clave">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
                     </form>
@@ -74,6 +77,16 @@
         </div>
 
     </main>
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+        </ul>
+        <p class="text-center text-muted">© 2021 Company, Inc</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
