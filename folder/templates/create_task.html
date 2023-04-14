@@ -5,24 +5,24 @@ Crear Tarea / Anotacion
 {% endblock titulo %}
 {% block contenido %}
 
+
+
 <div class="container d-flex d-flex justify-content-center align-items-center vh-100">
-    <div class="container d-flex d-flex justify-content-center align-items-center vh-100">
-        <div class="container d-flex d-flex justify-content-center align-items-center vh-100">
-            <div class="card border-primary" style="max-width: 100rem;">
-                <div class="card-header">Crear Tarea/Anotacion
-                </div>
-                <div class="card-body">
-                    {{error}}
-                    <form action="/create_task/" method="POST">
-                        {% csrf_token %}
-                        <table>
-                            {{form.as_table}}
-                        </table>
-                        <button>Guardar</button>
-                    </form>
-                </div>
-            </div>
+    <div class="card text-white bg-secondary" style="max-width: 100rem;">
+        <div class="card-header">Crear Tarea/Anotacion
+        </div>
+        <div class="card-body text-white bg-secondary">
+            {{error}}
+            <form class="p-2" action="/create_task/" method="POST">
+                {% csrf_token %}
+
+                {{form.as_p}}
+
+                <button class="btn btn-primary mx-5">Guardar</button>
+            </form>
         </div>
     </div>
+</div>
 
-    {% endblock contenido%}
+
+{% endblock contenido%}

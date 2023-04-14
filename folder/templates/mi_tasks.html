@@ -12,12 +12,10 @@ Mis Apuntes
         <div class="card-body">
             {% if tasks %}
             {% for task in tasks %}
-            {% if task.importante %}
             <div class="card text-primary bg-warning mb-3" style="width: 100%">
-                <div class="card-header">TAREA IMPORTANTE</div>
+                <div class="card-header">{{task.titulo}}</div>
                 <div class="card-body">
-                    <h4 class="card-title">{{task.titulo}}</h4>
-                    <p class="card-text">{{task.descripcion}}</p>
+                    <h4 class="card-title">{{task.descripcion}}</h4>
                     <div class="d-flex d-flex justify-content-end align-items-center"> <span><a
                                 href="{% url 'detail_task' task.id %}" class="btn
                                     btn-primary">Modificar</a></span>
@@ -32,29 +30,6 @@ Mis Apuntes
                     </div>
                 </div>
             </div>
-            {% else %}
-            <div class="card text-white bg-secondary mb-3" style="width: 100%;">
-                <div class="card-header">TAREA</div>
-                <div class="card-body">
-                    <h4 class="card-title">{{task.titulo}}</h4>
-                    <p class="card-text">{{task.descripcion}}</p>
-                    <div class="d-flex d-flex justify-content-end align-items-center"> <span><a
-                                href="{% url 'detail_task' task.id %}" class="btn
-                            btn-primary">Modificar</a></span>
-                        <span>
-                            <form action="{% url 'delete_task' task.id %}" method="POST">
-                                {% csrf_token %}
-                                <button class="btn btn-danger">
-                                    Borrar
-                                </button>
-                            </form>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            {% endif %}
-
             {% endfor %}
             {% else %}
             <div class="card text-white bg-success mb-3" style="max-width: 100rem;">

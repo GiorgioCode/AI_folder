@@ -5,7 +5,7 @@ from .models import Task, Fav
 class TaskForm(ModelForm):
     class Meta:
         model = Task
-        fields = ['titulo', 'descripcion', 'importante']
+        fields = ['titulo', 'descripcion']
 
 
 class Fav(ModelForm):
