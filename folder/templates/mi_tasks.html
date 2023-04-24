@@ -5,7 +5,7 @@ Mis Apuntes
 {% endblock titulo %}
 
 {%block contenido%}
-<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+<div class="container d-flex d-flex justify-content-center align-items-top">
     <div class="card border-white text-white bg-secondary" style="width: 90%">
         <div class="card-header">Mis Tareas <a class="btn btn-primary mx-5" href="{%url 'create_task'%}">Nueva
                 Tarea</a></div>
@@ -32,8 +32,7 @@ Mis Apuntes
             </div>
             {% endfor %}
             {% else %}
-            <div class="card text-white bg-success mb-3" style="max-width: 100rem;">
-                <div class="card-header">TAREAS</div>
+            <div class="card text-white bg-primary mb-3" style="max-width: 100rem;">
                 <div class="card-body">
                     <h4 class="card-title">Buenas noticias!! no tienes tareas pendientes!!</h4>
                 </div>

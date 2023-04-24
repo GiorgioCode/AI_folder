@@ -1,15 +1,51 @@
 {% extends "base.html" %}
 {% load static %}
 {% block titulo %}
-Detalle de Favorito
+{{fav.nombre}}
 {% endblock titulo %}
 
 
 
 
 {% block contenido %}
-<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
-    <h1>Detalle de Favorito</h1>
+<div class="container d-flex d-flex justify-content-center">
+
+    <div class="container">
+        <div class="card">
+
+            <div class="row">
+                <div class="col-md-6 text-center d-flex d-flex align-items-center">
+                    {% if fav.imagen %}
+                    <img src="{{fav.imagen}}" class="img-fluid" alt="">
+                    {% else %}
+                    <img src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
+                    {% endif %}
+                </div>
+                <div class="col-md-6 info">
+                    <div class="row title">
+                        <div class="col m-2">
+                            <h2>{{fav.nombre}}</h2>
+                        </div>
+                    </div>
+                    <p class="text-right m-2">Compartido por: {{fav.user}}</p>
+                    <p class="mb-2">Palabras clave: {{fav.claves}}</p>
+                    <p class="h3 m-2"> {{fav.descripcion}}</p>
+
+                </div>
+            </div>
+            <div class="row lower">
+                <div class="col text-right align-self-center">
+                    <a class='btn btn-outline-primary' href="{%url 'explore' %}">Volver</a>
+                    <a class='btn btn-outline-primary' target="_blank" href="{{fav.url}}">Visitar URL</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+
 </div>
 
 

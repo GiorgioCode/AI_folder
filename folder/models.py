@@ -30,9 +30,11 @@ class Fav(models.Model):
         choices=OPCIONES_TIPOS,
         default='Aplicacion'
     )
+    descripcion = models.TextField(max_length=1000, default="")
     claves = models.CharField(max_length=100)
     url = models.URLField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    imagen = models.URLField(max_length=250, default="")
 
     def __str__(self):
-        return f'{self.user} - {self.user}'
+        return f'{self.user} - {self.nombre}'

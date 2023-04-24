@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block titulo %}
-{{task.title}}
+{{fav.title}}
 {% endblock titulo %}
 {% block contenido %}
 <div class="container d-flex d-flex justify-content-center align-items-center vh-100">
 
     <div class="card bg-light mb-3" style="max-width: 100rem;">
-        <div class="card-header">Modificar Tarea</div>
+        <div class="card-header">Modificar Favorito</div>
         <div class="card-body">
-            <h4 class="card-title">{{task.title}}</h4>
+            <h4 class="card-title">{{fav.title}}</h4>
 
             <form method="POST">
                 {% csrf_token %}

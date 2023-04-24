@@ -8,13 +8,13 @@ Recomendar Favorito
 
 
 {% block contenido %}
-<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
-    <h1>Recomendar Favorito/h1>
-        <form action="/create_note/" method="POST">
-            {% csrf_token %}
-
-            <button>Guardar</button>
-        </form>
+<div class="container d-flex d-flex justify-content-center align-items-center">
+    <form class="text-white" method="POST">
+        {% csrf_token %}
+        {{form.as_div}}
+        <p class="text-white">*El campo de URL de imagen es opcional</p>
+        <button>Guardar</button>
+    </form>
 </div>
 
 {% endblock contenido %}

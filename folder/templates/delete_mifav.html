@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block titulo %}
+{{fav.title}}
+{% endblock titulo %}
+{% block contenido %}
+<div class="container d-flex d-flex justify-content-center align-items-top">
+
+    <div class="card bg-dark text-white mb-3" style="max-width: 100rem;">
+        <div class="card-header">Borrar Favorito</div>
+        <div class="card-body">
+            <h4 class="card-title">{{fav.title}}</h4>
+            <form action="{% url 'delete_mifav' fav.id %}" method="POST">
+                {% csrf_token %}
+                <h1>Seguro deseas eliminar {{fav.nombre}} ?</h1>
+                <span>
+                    <a href="{% url 'mi_favs'%}" class="btn btn-warning text-primary">Cancelar</a>
+                </span>
+                <span>
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                </span>
+
+            </form>
+        </div>
+    </div>
+
+    {% endblock contenido%}

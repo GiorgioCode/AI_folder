@@ -10,3 +10,7 @@ class TaskAdmin(admin.ModelAdmin):
 
 admin.site.register(Task, TaskAdmin)
 admin.site.register(Fav)
+
+
+admin.site.site_header = 'AI Folder'
+admin.site.site_title = 'Panel de Administracion'

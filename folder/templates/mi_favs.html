@@ -8,8 +8,70 @@ Mis Favoritos
 
 
 {% block contenido %}
-<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+<div class="container-fluid d-flex d-flex justify-content-center align-items-top">
+    <div class="row">
+        <div class="col-lg-12">
+            {% if favs %}
+            <div class="card border-white bg-primary text-white mb-3">
+                <div class="card-header">Mis Favoritos <a class="btn btn-warning text-primary"
+                        href="{%url 'create_fav'%}">Crear
+                        Favorito</a></div>
+                <div class="card-body">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Tipo:</th>
+                                <th scope="col">Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fav in favs %}
+                            <tr>
+                                <td>
+                                    {% if fav.imagen %}
+                                    <img src="{{fav.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{fav.nombre}}</td>
+                                <td>{{fav.tipo}}</td>
+                                <td class="d-flex d-flex">
+                                    <span><a href="{% url 'detail_mifav' fav.id %}" class="btn
+                                            btn-warning text-primary">Modificar</a></span>
+                                    <span>
+                                        <form action="{% url 'delete_mifav' fav.id %}" method="GET">
+                                            {% csrf_token %}
+                                            <button class="btn btn-danger">
+                                                Borrar
+                                            </button>
+                                        </form>
+                                </td>
 
-    <h1>Mis Favoritos</h1>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            {% else %}
+            <div class="card text-white bg-primary border-white mb-3" style="max-width: 100rem;">
+                <div class="card-header">Mis favoritos</div>
+                <div class="card-body">
+                    <h4 class="card-title">No tienes Favoritos guardados, pero... puedes crear uno ahora!</h4>
+                    <div class="d-flex justify-content-center">
+
+                        <a class="btn btn-warning" href="{%url 'create_fav'%}">Crear Favorito</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
 </div>
 {% endblock contenido %}

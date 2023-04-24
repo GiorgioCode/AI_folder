@@ -6,14 +6,22 @@ from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from .models import Task
-from .forms import TaskForm
+from .models import *
+from .forms import TaskForm, FavForm
+from django.views.generic.edit import DeleteView, CreateView, UpdateView
+from django.views.generic import DetailView, View, ListView
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponse, Http404, JsonResponse
 
 
 def home(request):
     return render(request, 'home.html')
 
 # Manejo de usuarios
+
+
+def error_404_view(request, exception):
+    return render(request, 'error_404.html')
 
 
 def user_signup(request):
@@ -88,7 +96,7 @@ def create_task(request):
             new_task.save()
             return redirect('mi_tasks')
         except ValueError:
-            return render(request, 'create_task.html', {"form": TaskForm, "error": "Error creating task."})
+            return render(request, 'create_task.html', {"form": TaskForm, "error": "Error creando la tarea"})
 
 
 @login_required
@@ -104,7 +112,7 @@ def detail_task(request, task_id):
             form.save()
             return redirect('mi_tasks')
         except ValueError:
-            return render(request, 'detail_task.html', {'task': task, 'form': form, 'error': 'Error updating task.'})
+            return render(request, 'detail_task.html', {'task': task, 'form': form, 'error': 'Error actualizando la tarea'})
 
 
 @login_required
@@ -124,17 +132,69 @@ def delete_task(request, task_id):
 # Manejo de favoritos
 
 
+@login_required
 def mi_favs(request):
-    return render(request, 'mi_favs.html')
+    favs = Fav.objects.filter(user=request.user)
+
+    return render(request, 'mi_favs.html', {"favs": favs})
 
 
-def detail_fav(request):
-    return render(request, 'detail_fav.html')
+class detail_fav(DetailView):
+    model = Fav
+    template_name = 'detail_fav.html'
+    context_object_name = 'fav'
 
 
+def detail_mifav(request, fav_id):
+    if request.method == 'GET':
+        fav = get_object_or_404(Fav, pk=fav_id, user=request.user)
+        form = FavForm(instance=fav)
+        return render(request, 'detail_mifav.html', {'fav': fav, 'form': form})
+    else:
+        try:
+            fav = get_object_or_404(Fav, pk=fav_id, user=request.user)
+            form = FavForm(request.POST, instance=fav)
+            form.save()
+            return redirect('mi_favs')
+        except ValueError:
+            return render(request, 'detail_mifav.html', {'fav': fav, 'form': form, 'error': 'Error actualizando la tarea'})
+
+
+class delete_mifav(DeleteView):
+    model = Fav
+    template_name = 'delete_mifav.html'
+    success_url = '/mi_favs'
+    context_object_name = 'fav'
+
+
+@login_required
 def create_fav(request):
+    if request.method == "GET":
+        return render(request, 'create_fav.html', {"form": FavForm})
+    else:
+        try:
+            form = FavForm(request.POST)
+            new_fav = form.save(commit=False)
+            new_fav.user = request.user
+            new_fav.save()
+            return redirect('mi_favs')
+        except ValueError:
+            return render(request, 'create_fav.html', {"form": FavForm, "error": "Error al crear el favorito"})
     return render(request, 'create_fav.html')
 
 
 def explore(request):
-    return render(request, 'explore.html')
+    favs = Fav.objects.all()
+    cheatsheets = favs.filter(tipo__icontains="CheatSheet")
+    cantidad_cheatsheets = cheatsheets.count()
+    webs = favs.filter(tipo__icontains="Web")
+    cantidad_webs = webs.count()
+    aplicaciones = favs.filter(tipo__icontains="Aplicacion")
+    cantidad_aplicaciones = aplicaciones.count()
+    apuntes = favs.filter(tipo__icontains="Apunte")
+    cantidad_apuntes = apuntes.count()
+    modelos = favs.filter(tipo__icontains="Modelo")
+    cantidad_modelos = modelos.count()
+    varios = favs.filter(tipo__icontains="Varios")
+    cantidad_varios = varios.count()
+    return render(request, 'explore.html', {"cheatsheets": cheatsheets, 'cantidad_cheatsheets': cantidad_cheatsheets, 'webs': webs, 'cantidad_webs': cantidad_webs, 'aplicaciones': aplicaciones, 'cantidad_aplicaciones': cantidad_aplicaciones, 'apuntes': apuntes, 'cantidad_apuntes': cantidad_apuntes, 'modelos': modelos, 'cantidad_modelos': cantidad_modelos, 'varios': varios, 'cantidad_varios': cantidad_varios})

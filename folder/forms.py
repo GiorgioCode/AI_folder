@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from .models import Task, Fav
+from django import forms
 
 
 class TaskForm(ModelForm):
@@ -8,7 +9,11 @@ class TaskForm(ModelForm):
         fields = ['titulo', 'descripcion']
 
 
-class Fav(ModelForm):
+class FavForm(ModelForm):
     class Meta:
         model = Fav
-        fields = ['nombre', 'tipo', 'claves', 'url']
+        fields = ['nombre', 'descripcion', 'tipo', 'claves', 'url', 'imagen']
+
+    def __init__(self, *args, **kwargs):
+        super(FavForm, self).__init__(*args, **kwargs)
+        self.fields['imagen'].required = False

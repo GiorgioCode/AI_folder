@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}
+Pagina no encontrada
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+<div class="container d-flex d-flex justify-content-center align-items-center flex-column">
+
+
+
+    <div>
+        <a class="navbar-brand" href="{%url 'home'%}"><img style="width:12rem;margin:0px"
+                src="{%static 'img/aifolder.png'%}" alt="" srcset=""></a>
+    </div>
+    <div>
+        <h1 class="text-white text-center">ERROR 404</h1>
+        <hr>
+        <h2 class="text-white text-center">Pagina no encontrada</h2>
+
+    </div>
+</div>
+
+{% endblock contenido %}

@@ -6,91 +6,262 @@ Explorar
 
 {% block contenido %}
 
-<div class="container d-flex d-flex justify-content-center align-items-center vh-100">
+<div class="container d-flex d-flex justify-content-center align-items-top" style="max-width: 100%">
     <div class="row">
-        <div class="col-lg-8">
-            <div class="card border-dark mb-3 margenarriba" style="max-width: 120rem;">
-                <div class="card-header">Apps y Proyectos</div>
+        <div class="col-lg-9 col-sm-12">
+            {% if webs %}
+            <div class="card border-white bg-primary text-white mb-3" style="max-width: 120rem;">
+                <div class="card-header">Webs</div>
                 <div class="card-body">
-                    <h4 class="card-title">Dark card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <div>
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">5</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">&raquo;</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Compartido por:</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for web in webs %}
+                            <tr>
+                                <td>
+                                    {% if web.imagen %}
+                                    <img src="{{web.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{web.nombre}}</td>
+                                <td>{{web.user}}</td>
+                                <td>
+                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' web.id %}">Ver
+                                        mas</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
-            <div class="card border-dark mb-3" style="max-width: 120rem;">
-                <div class="card-header">Apuntes, notas y Cheatsheets</div>
+            {% endif %}
+            {% if aplicaciones %}
+            <div class="card border-white bg-primary text-white mb-3" style="max-width: 120rem;">
+                <div class="card-header">Aplicaciones</div>
                 <div class="card-body">
-                    <h4 class="card-title">Dark card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
-                    <div>
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#">&laquo;</a>
-                            </li>
-                            <li class="page-item active">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">4</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">5</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">&raquo;</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Compartido por:</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for aplicacion in aplicaciones %}
+                            <tr>
+                                <td>
+                                    {% if aplicacion.imagen %}
+                                    <img src="{{aplicacion.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{aplicacion.nombre}}</td>
+                                <td>{{aplicacion.user}}</td>
+                                <td>
+                                    <a class='btn btn-warning text-primary'
+                                        href="{%url 'detail_fav' aplicacion.id %}">Ver
+                                        mas</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            {% endif %}
+            {% if cheatsheets %}
+            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
+                <div class="card-header">Cheatsheets</div>
+                <div class="card-body">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Compartido por:</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cheatsheet in cheatsheets %}
+                            <tr>
+                                <td>
+                                    {% if cheatsheet.imagen %}
+                                    <img src="{{cheatsheet.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{cheatsheet.nombre}}</td>
+                                <td>{{cheatsheet.user}}</td>
+                                <td>
+                                    <a class='btn btn-warning text-primary'
+                                        href="{%url 'detail_fav' cheatsheet.id %}">Ver
+                                        mas</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            {% endif %}
+            {% if apuntes %}
+            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
+                <div class="card-header">Apuntes</div>
+                <div class="card-body">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Compartido por:</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for apunte in apuntes %}
+                            <tr>
+                                <td>
+                                    {% if apunte.imagen %}
+                                    <img src="{{apunte.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{apunte.nombre}}</td>
+                                <td>{{apunte.user}}</td>
+                                <td>
+                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' apunte.id %}">Ver
+                                        mas</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
+            {% endif %}
+            {% if modelos %}
+            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
+                <div class="card-header">Modelos</div>
+                <div class="card-body">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Compartido por:</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for modelo in modelos %}
+                            <tr>
+                                <td>
+                                    {% if modelo.imagen %}
+                                    <img src="{{modelo.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{modelo.nombre}}</td>
+                                <td>{{modelo.user}}</td>
+                                <td>
+                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' modelo.id %}">Ver
+                                        mas</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+            {% if varios %}
+            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
+                <div class="card-header">Varios</div>
+                <div class="card-body">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre:</th>
+                                <th scope="col">Compartido por:</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in varios %}
+                            <tr>
+                                <td>
+                                    {% if item.imagen %}
+                                    <img src="{{item.imagen}}" style="width:80px" alt="">
+                                    {% else %}
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    {% endif %}
+                                </td>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.user}}</td>
+                                <td>
+                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' item.id %}">Ver
+                                        mas</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
         </div>
-        <div class="col-lg-4 margenarriba">
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="col-lg-3">
+            <ul class="list-group card border-white bg-primary text-white mb-3">
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
                     Apuntes
-                    <span class="badge bg-primary rounded-pill text-white">23</span>
+                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_apuntes}}</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
                     Cheatsheets
-                    <span class="badge bg-primary rounded-pill text-white">56</span>
+                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_cheatsheets}}</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
                     Aplicaciones
-                    <span class="badge bg-primary rounded-pill text-white">34</span>
+                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_aplicaciones}}</span>
+                </li>
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                    Webs
+                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_webs}}</span>
+                </li>
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                    Modelos
+                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_modelos}}</span>
+                </li>
+                <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                    Varios
+                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_varios}}</span>
                 </li>
             </ul>
         </div>
