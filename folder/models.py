@@ -38,3 +38,10 @@ class Fav(models.Model):
 
     def __str__(self):
         return f'{self.user} - {self.nombre}'
+
+
+class Comments(models.Model):
+    fav = models.ForeignKey(Fav, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comentario = models.CharField(max_length=200)
+    creado = models.DateTimeField(auto_now_add=True)

@@ -4,8 +4,6 @@ from folder import views
 from django.urls import path, re_path
 from django.conf.urls import handler404
 
-UUID_CANAL_REGEX = r'canal/(?P<pk>[a-f0-9]{8}-?[a-f0-9]{4}-?4[a-f0-9]{3}-?[89ab][a-f0-9]{3}-?[a-f0-9]{12})'
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -25,7 +23,7 @@ urlpatterns = [
     # URLS DE FAVORITOS
     path('mi_favs/', views.mi_favs, name='mi_favs'),
     path('create_fav/', views.create_fav, name='create_fav'),
-    path('detail_fav/<pk>/', views.detail_fav.as_view(), name='detail_fav'),
+    path('detail_fav/<int:fav_id>/', views.detail_fav, name='detail_fav'),
     path('detail_mifav/<int:fav_id>', views.detail_mifav, name='detail_mifav'),
     path('delete_mifav/<pk>/', views.delete_mifav.as_view(), name='delete_mifav'),
 ]

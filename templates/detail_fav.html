@@ -39,6 +39,42 @@
                     <a class='btn btn-outline-primary' target="_blank" href="{{fav.url}}">Visitar URL</a>
                 </div>
             </div>
+            <hr>
+            <div class="card bg-dark text-white mb-3" style="max-width: 100rem;">
+                <div class="card-header">Comentarios</div>
+
+                <hr>
+                {% for comentario in comentarios %}
+                <div class="card bg-warning text-primary m-1">
+                    <div class="card-header">Creado por {{comentario.user}} - {{comentario.creado}}</div>
+                    <div class="card-body">
+                        <h3>{{comentario.comentario}}</h3>
+
+                    </div>
+
+                </div>
+
+
+                {% endfor %}
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{form}}
+
+                        <button class="btn btn-primary">
+                            Comentar
+                        </button>
+                    </form>
+
+                    {% else %}
+                    <h2>Debes iniciar sesion para poder crear comentarios =)</h2>
+
+                    {% endif %}
+                </div>
+
+            </div>
         </div>
     </div>
 

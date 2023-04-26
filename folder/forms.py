@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Task, Fav
+from .models import Task, Fav, Comments
 from django import forms
 
 
@@ -17,3 +17,9 @@ class FavForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(FavForm, self).__init__(*args, **kwargs)
         self.fields['imagen'].required = False
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['comentario']

@@ -7,7 +7,7 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import *
-from .forms import TaskForm, FavForm
+from .forms import TaskForm, FavForm, CommentForm
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import DetailView, View, ListView
 from django.core.exceptions import PermissionDenied
@@ -139,10 +139,36 @@ def mi_favs(request):
     return render(request, 'mi_favs.html', {"favs": favs})
 
 
-class detail_fav(DetailView):
+""" class detail_fav(DetailView):
     model = Fav
     template_name = 'detail_fav.html'
-    context_object_name = 'fav'
+    context_object_name = 'fav' """
+
+
+def detail_fav(request, fav_id):
+    if request.method == 'GET':
+        try:
+            fav = get_object_or_404(Fav, id=fav_id)  # ok
+            print(fav)
+            commentform = CommentForm(request.GET, instance=fav)
+            comments_fav = Comments.objects.filter(fav_id=fav_id)
+            print(comments_fav)
+            return render(request, 'detail_fav.html', {'fav': fav, 'form': commentform, 'comentarios': comments_fav})
+        except:
+            return render(request, 'detail_fav.html', {'fav': fav, 'form': commentform, 'comments': comments_fav, 'error': 'Error actualizando la tarea'})
+    else:
+        try:
+            fav = get_object_or_404(Fav, id=fav_id)
+            comments_fav = Comments.objects.filter(fav_id=fav_id)
+            commentform = CommentForm(request.POST, instance=fav)
+            comment = CommentForm(request.POST)
+            new_comment = comment.save(commit=False)
+            new_comment.user = request.user
+            new_comment.fav_id = fav_id
+            new_comment.save()
+            return render(request, 'detail_fav.html', {'fav': fav, 'form': commentform, 'comentarios': comments_fav})
+        except:
+            return render(request, 'detail_fav.html', {'fav': fav, 'form': commentform, 'comentarios': comments_fav, 'error': 'Error actualizando la tarea'})
 
 
 def detail_mifav(request, fav_id):
