@@ -10,7 +10,7 @@ class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.user} - {self.user}'
+        return f'{self.titulo} de {self.user}'
 
 
 OPCIONES_TIPOS = (
@@ -37,7 +37,7 @@ class Fav(models.Model):
     imagen = models.URLField(max_length=250, default="")
 
     def __str__(self):
-        return f'{self.user} - {self.nombre}'
+        return f'{self.nombre}'
 
 
 class Comments(models.Model):
@@ -45,3 +45,6 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comentario = models.CharField(max_length=200)
     creado = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.comentario} en {self.fav} de {self.user}'
