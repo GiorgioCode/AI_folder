@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block titulo %}
+Acerca de
+{% endblock titulo %}
+
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="card bg-dark border-warning text-white">
+                <div class="card-header">Acerca de</div>
+                <div class="card-body">
+                    <h3 class="text-warning">Desarrolado por: Jorge Angel PAEZ
+                        <br>
+                        <div class="d-flex justify-content-center">
+                            <a class='btn btn-outline-warning m-2' href="https://github.com/GiorgioCode" target="_blank"
+                                rel="noopener noreferrer">Github</a>
+                            <a class='btn btn-outline-warning m-2' href="https://www.linkedin.com/in/jorge-angel-paez/"
+                                target="_blank" rel="noopener noreferrer">LinkedIn</a>
+
+                        </div>
+                    </h3>
+                    <hr>
+                    <h2 class="text-warning">Descripcion del proyecto:</h2>
+                    <h4>AI-Folder, es un proyecto de prueba que intenta ser el lugar de union entre desarrolladores,
+                        entusiastas, amantes de la tecnologia o simplemente interesados en aplicaciones de Machine
+                        Learning e Inteligencia Artificial.</h4>
+                    <hr>
+                    <h2 class="text-warning">Tecnologias utilizadas:</h2>
+                    <ul>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>Django Framework 4.2</li>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>Bootstrap 5</li>
+                        <li>Bootswatch</li>
+                        <li>SQLite (Desarrollo)</li>
+                        <li>PostgreSQL (Despliegue)</li>
+
+                    </ul>
+                    <hr>
+                    <h2 class="text-warning">Librerias de Python/Django utilizadas:</h2>
+                    <ul>
+                        <li>autopep8 2.0</li>
+                        <li>crispy-bootstrap5 0.7</li>
+                        <li>django-crispy-forms 2.0</li>
+                        <li>asgiref</li>
+                        <li>sqlparse 0.4</li>
+                        <li>whitenoise 6.4</li>
+                    </ul>
+                    <hr>
+                    <h2 class="text-center">Control de avance</h2>
+                    <hr>
+                    <div class="bg-primary m-2 p-2">
+
+                        <h2 class="text-success">Funcionalidades incluidas:</h2>
+                        <ul>
+                            <li>Control de Usuarios con Jerarquias</li>
+                            <li>Acceso de Usuarios</li>
+                            <li>Registro de Usuarios</li>
+                            <li>Crud Favoritos de Usuarios</li>
+                            <li>Crud Tareas pendientes de Usuarios</li>
+                            <li>Exploracion de Favoritos de Usuarios</li>
+                            <li>Busqueda de Favoritos de Usuarios</li>
+                            <li>Sistema de mensajes privados entre Usuarios</li>
+                            <li>Sistema de comentarios de Favoritos de Usuarios</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <div class="bg-primary m-2 p-2">
+
+                        <h2 class="text-danger">Pendientes:</h2>
+                        <ul>
+                            <li>Mejoras en sistema de busqueda de favoritos</li>
+                            <li>Paginacion de favoritos</li>
+                            <li>Mejoras en perfil de Usuarios</li>
+                            <li>Sistema de muro de usuarios</li>
+                            <li>Sistema de likes</li>
+                            <li>Sistema de novedades / Blog</li>
+                            <li>Optmizacion de rendimiento</li>
+                            <li>Reparacion de bugs en sistema de mensajeria</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contenido %}

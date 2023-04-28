@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+{{blog.titulo}}
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+
+<style>
+    .imagen_blog {
+        object-fit: cover;
+        width: 100%;
+        height: 200px;
+        overflow-x: hidden;
+    }
+</style>
+
+<div class="container">
+    <div class="card bg-primary text-white">
+
+        <div class=" bg-primary text-white">
+            <div class="text-center">
+                <h5 class="text-warning">{{blog.seccion}}</h3>
+                    <h1 class="display-2">{{blog.titulo}}</h1>
+                    <h3>{{blog.subtitulo}}</h3>
+            </div>
+            <div class="text-center">
+                {% if blog.imagen %}
+                <img class="imagen_blog" src="{{blog.imagen}}" alt="" srcset="">
+                {% else %}
+                <img src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
+                {% endif %}
+            </div>
+
+            <p class="text-right m-2">Creado por: {{blog.autor}}</p>
+            <div class="d-flex justify-content-end">
+
+                <a class="btn btn-outline-warning" href="/mensajes/ms/{{blog.autor}}">Enviar mensaje a
+                    {{blog.autor}}</a>
+            </div>
+            <hr>
+            <p class="h3 m-2"> {{blog.cuerpo}}</p>
+            <p class="mb-2">Referencia: <a class='text-white' target="_blank"
+                    href="{{blog.referencia}}">{{blog.referencia}}</a></p>
+            <hr>
+            <div class="sharethis-inline-share-buttons bg-primary text-white m-2"></div>
+            <hr>
+
+        </div>
+    </div>
+
+    <div class="card bg-dark text-white mb-3">
+        <div class="card-header">Comentarios</div>
+        {% for comentario in comentarios %}
+        <div class="card border-warning bg-primary text-warning m-1">
+            <div class="card-header">Creado por {{comentario.user}} - {{comentario.creado}}</div>
+            <div class="card-body">
+                <h3>{{comentario.comentario}}</h3>
+
+            </div>
+
+        </div>
+
+
+        {% endfor %}
+        <div class="card-body">
+            {% if user.is_authenticated %}
+
+            <form action='{% url "detail_blog" blog.id %}' method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <span class="d-flex justify-content-end">
+
+                    <button class="btn btn-outline-warning ">
+                        Comentar
+                    </button>
+                </span>
+            </form>
+
+            {% else %}
+            <div class="alert alert-danger">
+                <strong>Debes haber iniciado sesion para poder realizar comentarios</strong> <a
+                    class='btn btn-outline-primary m-2' href="{%url 'user_login'%}">Iniciar sesion</a>
+
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+
+{% endblock contenido %}

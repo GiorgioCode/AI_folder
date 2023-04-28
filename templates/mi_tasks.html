@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block titulo %}
 Mis Apuntes
@@ -7,13 +8,17 @@ Mis Apuntes
 {%block contenido%}
 <div class="container d-flex d-flex justify-content-center align-items-top">
     <div class="card border-white text-white bg-secondary" style="width: 90%">
-        <div class="card-header">Mis Tareas <a class="btn btn-primary mx-5" href="{%url 'create_task'%}">Nueva
+        <div class="card-header">Mis Tareas <a class="btn btn-outline-warning mx-5" href="{%url 'create_task'%}">Nueva
                 Tarea</a></div>
         <div class="card-body">
             {% if tasks %}
             {% for task in tasks %}
             <div class="card text-primary bg-warning mb-3" style="width: 100%">
-                <div class="card-header">{{task.titulo}}</div>
+                <div class="card-header">
+                    <span class="h3">
+                        {{task.titulo}}
+                    </span> - creada: {{task.creado}}
+                </div>
                 <div class="card-body">
                     <h4 class="card-title">{{task.descripcion}}</h4>
                     <div class="d-flex d-flex justify-content-end align-items-center"> <span><a

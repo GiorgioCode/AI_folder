@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+Mis Favoritos
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card border-white bg-primary text-white mb-3">
+                <div class="card-header">Resultados de busqueda para "{{claves}}"
+                    {% if resultado %}
+                    {% if favs %}
+                    <hr>
+                    <div class="card-body">
+                        <table class="table table-fluid table-dark">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" scope="col"></th>
+                                    <th class="text-center" scope="col">Nombre:</th>
+                                    <th class="text-center" scope="col">Tipo:</th>
+                                    <th class="text-center" scope="col">Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for fav in favs %}
+                                <tr>
+                                    <td class="d-flex d-flex justify-content-center">
+                                        {% if fav.imagen %}
+                                        <img src="{{fav.imagen}}" style="width:50px" alt="">
+                                        {% else %}
+                                        <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:50px" alt="">
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">{{fav.nombre}}</td>
+                                    <td class="text-center">{{fav.tipo}}</td>
+                                    <td class="d-flex justify-content-center ">
+                                        <a href="{% url 'detail_fav' fav.id %}" class="btn btn-outline-success">Ver</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% elif blogs%}
+                    <hr>
+
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                        {% for blog in blogs %}
+
+                        <div class="col">
+
+                            <div class="card shadow-sm bg-primary text-white border-white">
+                                <img class=" card-img-top" width="100%" height="225" src="{{blog.imagen}}" alt=""
+                                    srcset="">
+
+                                <div class="card-body">
+                                    <p class="card-text">{{blog.titulo}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-outline-success" href="{%url 'detail_blog' blog.id %}">
+                                                Ver mas</a>
+                                            <a class="btn btn-outline-warning" href="{%url 'update_blog' blog.id %}">
+                                                Modificar</a>
+                                        </div>
+                                        <small class="text-body-secondary">{{blog.fecha}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                    {% endif %}
+                    {% else %}
+                    <div class="card text-white bg-primary border-white mb-3" style="max-width: 100rem;">
+                        <div class="card-header">OOOPS...
+                            <div class="card-body">
+                                <h4 class="card-title">No tenemos resultados para "{{claves}}", pero te
+                                    invitamos a que
+                                    encuentres lo que buscas explorando =)</h4>
+                                <div class="d-flex justify-content-center">
+
+                                    <a class="btn btn-outline-warning m-2 p-2" href="{%url 'explore'%}">Explorar
+                                        Folder</a>
+                                    <a class="btn btn-outline-warning m-2 p-2" href="{%url 'blog'%}">Explorar Blogs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock contenido %}

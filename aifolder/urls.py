@@ -1,7 +1,6 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from folder import views
-from django.urls import path, re_path
 from django.conf.urls import handler404
 
 urlpatterns = [
@@ -26,6 +25,10 @@ urlpatterns = [
     path('detail_fav/<int:fav_id>/', views.detail_fav, name='detail_fav'),
     path('detail_mifav/<int:fav_id>', views.detail_mifav, name='detail_mifav'),
     path('delete_mifav/<pk>/', views.delete_mifav.as_view(), name='delete_mifav'),
+    path('about/', views.about, name='about'),
+    path('mensajes/', include('Dm.urls')),
+    path('pages/', include('blog.urls')),
+    path('search/', views.search, name='search')
 ]
 
 handler404 = 'folder.views.error_404_view'

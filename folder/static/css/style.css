@@ -1,6 +1,13 @@
 body {
-    background: gray;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    background: #333333;
 }
 .margenarriba {
     margin-top: 40px;
+}
+hr {
+    background: #333333;
+    border: #ffc007;
 }

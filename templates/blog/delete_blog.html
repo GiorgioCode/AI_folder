@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block titulo %}
+{{blog.title}}
+{% endblock titulo %}
+{% block contenido %}
+<div class="container d-flex d-flex justify-content-center align-items-top">
+
+    <div class="card bg-dark text-white mb-3" style="max-width: 100rem;">
+        <div class="card-header">Borrar Blog</div>
+        <div class="card-body">
+            <h4 class="card-title">{{blog.title}}</h4>
+            <form action="{% url 'delete_blog' blog.id %}" method="POST">
+                {% csrf_token %}
+                <h1>Seguro deseas eliminar {{blog.titulo}} ?</h1>
+                <div class="d-flex justify-content-end">
+
+                    <span>
+                        <a href="{% url 'update_blog' blog.id %}" class="btn btn-warning text-primary">Cancelar</a>
+                    </span>
+                    <span>
+                        <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </span>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    {% endblock contenido%}

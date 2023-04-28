@@ -8,16 +8,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/sketchy/bootstrap.min.css"
         integrity="sha384-RxqHG2ilm4r6aFRpGmBbGTjsqwfqHOKy1ArsMhHusnRO47jcGqpIQqlQK/kmGy9R" crossorigin="anonymous">
-    <link rel="stylesheet" href="{%static 'css/style.css'%}">
     <!--Se ha utilizado el template modificado de bootswatch llamado Sketchy (https://bootswatch.com/sketchy/)-->
+    <script type="text/javascript"
+        src="https://platform-api.sharethis.com/js/sharethis.js#property=64494b0d7d13a70012202bb9&product=inline-share-buttons&source=platform"
+        async="async"></script>
     <title>{% block titulo %}
 
         {% endblock titulo %}</title>
+    <meta name="description"
+        content="AI-Folder - Sitio dedicado a compartir contenido relacionado con Machine learning e IA">
+    <meta name="author" content="AI-Folder, creado por Jorge Angel Paez">
+    <style>
+        body {
+            margin: 0px;
+            border: 0px;
+            padding: 0px;
+            background: #333333;
+        }
+
+        .margenarriba {
+            margin-top: 40px;
+        }
+
+        hr {
+            background: #ffc007;
+            border: #ffc007;
+            border-color: #ffc007;
+            border-width: 1.5px;
+            border-style: solid;
+        }
+    </style>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-warning">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{%url 'home'%}"><img style="width:4rem;margin:0px"
                         src="{%static 'img/aifolder.png'%}" alt="" srcset=""></a>
@@ -31,46 +56,64 @@
                             <a class="nav-link active" href="{%url 'home'%}">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{%url 'explore'%}">Explorar</a>
+                            <a class="nav-link" href="{%url 'explore'%}">Folder</a>
                         </li>
-
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'blog'%}">Blogs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{%url 'about'%}">Acerca de</a>
+                        </li>
                         {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'mi_tasks'%}">Mis Tareas</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'mi_favs'%}">Mis Favoritos</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-warning" data-bs-toggle="dropdown" href="#"
                                 role="button" aria-haspopup="true" aria-expanded="false">{{user}}</a>
                             <div class="dropdown-menu bg-warning">
                                 <a class="dropdown-item" href="#">Propiedades</a>
                                 <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/mensajes/">Mis Mensajes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{%url 'mi_favs'%}">Mis Favoritos</a>
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href="{%url 'mi_tasks'%}">Mis Tareas</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="{%url 'user_logout'%}">Cerrar sesion</a>
                             </div>
                         </li>
                         {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'user_signup'%}">Registro</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{%url 'user_login'%}">Ingresar</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-warning" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">Anonim@</a>
+                            <div class="dropdown-menu bg-warning">
+                                <a class="dropdown-item" href="{%url 'user_signup'%}">Registro</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{%url 'user_login'%}">Iniciar Sesion</a>
+                            </div>
                         </li>
                         {% endif %}
+
                     </ul>
-                    <form class="d-flex d-flex flex-row justify-content-end">
-                        <input class="form-control me-sm-2" type="search" placeholder="palabras clave">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Buscar</button>
+                    <form class="d-flex" action="{% url 'search' %}" method="GET">
+                        {% csrf_token %}
+                        <div class="form">
+                            <div class="d-flex m-4">
+
+                                <input type="text" class="form-control" id="claves" name="claves"
+                                    placeholder="Inserte palabra clave" required><button
+                                    class="btn btn-outline-warning text-secoundary my-2 my-sm-0" type="submit"
+                                    class="btn btn-primary">Buscar</button>
+                            </div>
+                        </div>
+
                     </form>
+
                 </div>
             </div>
         </nav>
     </header>
     <main>
-        <div class="container-fluid" style="margin-top: 1rem">
+        <div style="margin-top: 1rem">
             {% block contenido %}
 
             {% endblock contenido %}

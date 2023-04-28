@@ -6,11 +6,11 @@ Explorar
 
 {% block contenido %}
 
-<div class="container d-flex d-flex justify-content-center align-items-top" style="max-width: 100%">
+<div class="container-fluid" style="width: 100%">
     <div class="row">
         <div class="col-lg-9 col-sm-12">
             {% if webs %}
-            <div class="card border-white bg-primary text-white mb-3" style="max-width: 120rem;">
+            <div class="card border-white bg-primary text-white mb-3">
                 <div class="card-header">Webs</div>
                 <div class="card-body">
                     <table class="table table-dark">
@@ -27,15 +27,15 @@ Explorar
                             <tr>
                                 <td>
                                     {% if web.imagen %}
-                                    <img src="{{web.imagen}}" style="width:80px" alt="">
+                                    <img src="{{web.imagen}}" style="width:60px" alt="">
                                     {% else %}
-                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
                                 <td>{{web.nombre}}</td>
                                 <td>{{web.user}}</td>
                                 <td>
-                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' web.id %}">Ver
+                                    <a class='btn btn-outline-warning' href="{%url 'detail_fav' web.id %}">Ver
                                         mas</a>
                                 </td>
                             </tr>
@@ -47,7 +47,7 @@ Explorar
             </div>
             {% endif %}
             {% if aplicaciones %}
-            <div class="card border-white bg-primary text-white mb-3" style="max-width: 120rem;">
+            <div class="card border-white bg-primary text-white mb-3">
                 <div class="card-header">Aplicaciones</div>
                 <div class="card-body">
                     <table class="table table-dark">
@@ -64,16 +64,15 @@ Explorar
                             <tr>
                                 <td>
                                     {% if aplicacion.imagen %}
-                                    <img src="{{aplicacion.imagen}}" style="width:80px" alt="">
+                                    <img src="{{aplicacion.imagen}}" style="width:60px" alt="">
                                     {% else %}
-                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
                                 <td>{{aplicacion.nombre}}</td>
                                 <td>{{aplicacion.user}}</td>
                                 <td>
-                                    <a class='btn btn-warning text-primary'
-                                        href="{%url 'detail_fav' aplicacion.id %}">Ver
+                                    <a class='btn btn-outline-warning' href="{%url 'detail_fav' aplicacion.id %}">Ver
                                         mas</a>
                                 </td>
                             </tr>
@@ -85,8 +84,8 @@ Explorar
             </div>
             {% endif %}
             {% if cheatsheets %}
-            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
-                <div class="card-header">Cheatsheets</div>
+            <div class="card border-white bg-primary text-white mb-3">
+                <div id='cheatsheets' class="card-header">Cheatsheets</div>
                 <div class="card-body">
                     <table class="table table-dark">
                         <thead>
@@ -102,16 +101,15 @@ Explorar
                             <tr>
                                 <td>
                                     {% if cheatsheet.imagen %}
-                                    <img src="{{cheatsheet.imagen}}" style="width:80px" alt="">
+                                    <img src="{{cheatsheet.imagen}}" style="width:60px" alt="">
                                     {% else %}
-                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
                                 <td>{{cheatsheet.nombre}}</td>
                                 <td>{{cheatsheet.user}}</td>
                                 <td>
-                                    <a class='btn btn-warning text-primary'
-                                        href="{%url 'detail_fav' cheatsheet.id %}">Ver
+                                    <a class='btn btn-outline-warning' href="{%url 'detail_fav' cheatsheet.id %}">Ver
                                         mas</a>
                                 </td>
                             </tr>
@@ -123,8 +121,8 @@ Explorar
             </div>
             {% endif %}
             {% if apuntes %}
-            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
-                <div class="card-header">Apuntes</div>
+            <div class="card border-white bg-primary text-white mb-3">
+                <div id='apuntes' class="card-header">Apuntes</div>
                 <div class="card-body">
                     <table class="table table-dark">
                         <thead>
@@ -140,15 +138,15 @@ Explorar
                             <tr>
                                 <td>
                                     {% if apunte.imagen %}
-                                    <img src="{{apunte.imagen}}" style="width:80px" alt="">
+                                    <img src="{{apunte.imagen}}" style="width:60px" alt="">
                                     {% else %}
-                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
                                 <td>{{apunte.nombre}}</td>
                                 <td>{{apunte.user}}</td>
                                 <td>
-                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' apunte.id %}">Ver
+                                    <a class='btn btn-outline-warning' href="{%url 'detail_fav' apunte.id %}">Ver
                                         mas</a>
                                 </td>
                             </tr>
@@ -159,8 +157,8 @@ Explorar
             </div>
             {% endif %}
             {% if modelos %}
-            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
-                <div class="card-header">Modelos</div>
+            <div class="card border-white bg-primary text-white mb-3">
+                <div id='modelos' class="card-header">Modelos</div>
                 <div class="card-body">
                     <table class="table table-dark">
                         <thead>
@@ -176,15 +174,15 @@ Explorar
                             <tr>
                                 <td>
                                     {% if modelo.imagen %}
-                                    <img src="{{modelo.imagen}}" style="width:80px" alt="">
+                                    <img src="{{modelo.imagen}}" style="width:60px" alt="">
                                     {% else %}
-                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
                                 <td>{{modelo.nombre}}</td>
                                 <td>{{modelo.user}}</td>
                                 <td>
-                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' modelo.id %}">Ver
+                                    <a class='btn btn-outline-warning' href="{%url 'detail_fav' modelo.id %}">Ver
                                         mas</a>
                                 </td>
                             </tr>
@@ -195,8 +193,8 @@ Explorar
             </div>
             {% endif %}
             {% if varios %}
-            <div class="card border-white bg-primary text-white mb-3" style="width: 100%">
-                <div class="card-header">Varios</div>
+            <div class="card border-white bg-primary text-white mb-3">
+                <div id='varios' class="card-header">Varios</div>
                 <div class="card-body">
                     <table class="table table-dark">
                         <thead>
@@ -212,15 +210,15 @@ Explorar
                             <tr>
                                 <td>
                                     {% if item.imagen %}
-                                    <img src="{{item.imagen}}" style="width:80px" alt="">
+                                    <img src="{{item.imagen}}" style="width:60px" alt="">
                                     {% else %}
-                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:80px" alt="">
+                                    <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.user}}</td>
                                 <td>
-                                    <a class='btn btn-warning text-primary' href="{%url 'detail_fav' item.id %}">Ver
+                                    <a class='btn btn-outline-warning' href="{%url 'detail_fav' item.id %}">Ver
                                         mas</a>
                                 </td>
                             </tr>
@@ -232,37 +230,58 @@ Explorar
             {% endif %}
         </div>
         <div class="col-lg-3">
-            <ul class="list-group card border-white bg-primary text-white mb-3">
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
-                    Apuntes
-                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_apuntes}}</span>
+            <ul class="list-group card border-white bg-primary text-white mb-3 position-sticky" style="top: 2rem">
+                <li>
+                    <a class="btn btn-outline-warning w-100" href="{% url 'create_fav'%}"> Crear Favorito </a>
                 </li>
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
-                    Cheatsheets
-                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_cheatsheets}}</span>
-                </li>
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
-                    Aplicaciones
-                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_aplicaciones}}</span>
-                </li>
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
-                    Webs
-                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_webs}}</span>
-                </li>
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
-                    Modelos
-                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_modelos}}</span>
-                </li>
-                <li
-                    class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
-                    Varios
-                    <span class="badge bg-warning rounded-pill text-primary">{{cantidad_varios}}</span>
-                </li>
+                <a href="#apuntes">
+
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                        Apuntes
+                        <span class="badge bg-warning rounded-pill text-primary">{{cantidad_apuntes}}</span>
+                    </li>
+                </a>
+                <a href="#cheatsheets">
+
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                        Cheatsheets
+                        <span class="badge bg-warning rounded-pill text-primary">{{cantidad_cheatsheets}}</span>
+                    </li>
+                </a>
+                <a href="#aplicaciones">
+
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                        Aplicaciones
+                        <span class="badge bg-warning rounded-pill text-primary">{{cantidad_aplicaciones}}</span>
+                    </li>
+                </a>
+                <a href="#webs">
+
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                        Webs
+                        <span class="badge bg-warning rounded-pill text-primary">{{cantidad_webs}}</span>
+                    </li>
+                </a>
+                <a href="#modelos">
+
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                        Modelos
+                        <span class="badge bg-warning rounded-pill text-primary">{{cantidad_modelos}}</span>
+                    </li>
+                </a>
+                <a href="#varios">
+
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center border-white bg-primary text-white">
+                        Varios
+                        <span class="badge bg-warning rounded-pill text-primary">{{cantidad_varios}}</span>
+                    </li>
+                </a>
             </ul>
         </div>
     </div>

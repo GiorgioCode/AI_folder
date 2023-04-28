@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block titulo %}
 Recomendar Favorito
@@ -8,13 +9,30 @@ Recomendar Favorito
 
 
 {% block contenido %}
-<div class="container d-flex d-flex justify-content-center align-items-center">
-    <form class="text-white" method="POST">
-        {% csrf_token %}
-        {{form.as_div}}
-        <p class="text-white">*El campo de URL de imagen es opcional</p>
-        <button>Guardar</button>
-    </form>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="card bg-dark text-white mb-3">
+                <div class="card-header">Guardar Favorito</div>
+                <div class="card-body">
+
+                    <form method="POST" style="width:100%">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-flex d-flex justify-content-end">
+
+                            <button class="btn btn-outline-warning">
+                                Guardar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
 
 {% endblock contenido %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+
+{% block contenido %}
+
+{% for inbox in inbox %}
+<div class="container-fluid ">
+
+	<div class="card bg-dark border-secoundary text-white mb-3">
+		<div class="card-header"></div>
+		<div class="card-body">
+
+			{% for second_user in inbox.canalusuario_set.all %}
+			{% if second_user.usuario == request.user %}
+
+			{% else %}
+			<h3>Canal con: {{second_user.usuario}}
+			</h3>
+			<hr>
+
+			{% if inbox.canalmensaje_set.count != 0 %}
+			<div class="div_ms_inbox">
+
+				{% with ultimo_mensaje=inbox.canalmensaje_set.last %}
+
+				Este canal tiene ({{inbox.canalmensaje_set.count}}) Mensaje/s
+
+				{% endwith %}
+			</div>
+			{% else %}
+			<p>
+				Canal sin mensajes
+			</p>
+			{% endif %}
+
+			<div class="d-flex justify-content-end">
+				<a class='btn btn-outline-warning' href="{% url 'detailms' second_user.usuario.username %}">
+					Abrir Canal
+				</a>
+			</div>
+			{% endif %}
+
+			{% endfor %}
+		</div>
+	</div>
+</div>
+</div>
+
+{% empty %}
+
+<div class="container-fluid">
+	<div class="card text-white bg-secondary" style="max-width: 200rem;">
+		<div class="card-header">Tus Mensajes
+		</div>
+		<div class="card-body text-white bg-secondary">
+			<h1>No tienes Canales activos en tu Inbox</h1>
+		</div>
+	</div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}

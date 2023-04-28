@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+Actualizar {{blog.titulo}}
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+                Datos de formulario invalidos. Por favor, verifique los datos e intentelo de nuevo.
+            </div>
+            {% endif %}
+            <div class="card bg-dark text-white mb-3">
+                <div class="card-header">Actualizar {{blog.titulo}}</div>
+                <div class="card-body">
+
+                    <form action="{% url 'update_blog' blog.id %}" method="POST" style="width:100%">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-flex d-flex justify-content-end">
+
+                            <button class="btn btn-outline-warning">
+                                Actualizar Blog
+                            </button>
+
+                        </div>
+                    </form>
+                    <div class="d-flex d-flex justify-content-end">
+
+                        <form action="{% url 'delete_blog' blog.id %}" method="GET">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-danger w-auto">
+                                Borrar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contenido %}

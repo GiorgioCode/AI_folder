@@ -7,11 +7,13 @@ from django.db import IntegrityError
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import *
+from blog.models import *
 from .forms import TaskForm, FavForm, CommentForm
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import DetailView, View, ListView
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse, Http404, JsonResponse
+from django.db.models import Q
 
 
 def home(request):
@@ -139,12 +141,6 @@ def mi_favs(request):
     return render(request, 'mi_favs.html', {"favs": favs})
 
 
-""" class detail_fav(DetailView):
-    model = Fav
-    template_name = 'detail_fav.html'
-    context_object_name = 'fav' """
-
-
 def detail_fav(request, fav_id):
     if request.method == 'GET':
         try:
@@ -224,3 +220,25 @@ def explore(request):
     varios = favs.filter(tipo__icontains="Varios")
     cantidad_varios = varios.count()
     return render(request, 'explore.html', {"cheatsheets": cheatsheets, 'cantidad_cheatsheets': cantidad_cheatsheets, 'webs': webs, 'cantidad_webs': cantidad_webs, 'aplicaciones': aplicaciones, 'cantidad_aplicaciones': cantidad_aplicaciones, 'apuntes': apuntes, 'cantidad_apuntes': cantidad_apuntes, 'modelos': modelos, 'cantidad_modelos': cantidad_modelos, 'varios': varios, 'cantidad_varios': cantidad_varios})
+
+
+def about(request):
+    return render(request, 'about.html')
+
+
+def search(request):
+    if request.GET['claves']:
+        claves = request.GET['claves']
+        print(claves)
+        favs = Fav.objects.filter(
+            Q(nombre__icontains=claves) | Q(descripcion__icontains=claves) | Q(tipo__icontains=claves))
+        print(favs)
+        blogs = Blog.objects.filter(Q(titulo__icontains=claves) | Q(
+            subtitulo__icontains=claves) | Q(seccion__icontains=claves) | Q(cuerpo__icontains=claves))
+        print(blogs)
+        Resultado = True
+        if blogs or favs:
+            Resultado = True
+        else:
+            Resultado = False
+        return render(request, 'search.html', {"favs": favs, "blogs": blogs, 'claves': claves, 'resultado': Resultado})

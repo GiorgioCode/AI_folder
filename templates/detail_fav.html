@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block titulo %}
 {{fav.nombre}}
@@ -8,78 +9,92 @@
 
 
 {% block contenido %}
-<div class="container d-flex d-flex justify-content-center">
 
-    <div class="container">
-        <div class="card">
 
-            <div class="row">
-                <div class="col-md-6 text-center d-flex d-flex align-items-center">
-                    {% if fav.imagen %}
-                    <img src="{{fav.imagen}}" class="img-fluid" alt="">
-                    {% else %}
-                    <img src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
-                    {% endif %}
-                </div>
-                <div class="col-md-6 info">
-                    <div class="row title">
-                        <div class="col m-2">
-                            <h2>{{fav.nombre}}</h2>
-                        </div>
-                    </div>
-                    <p class="text-right m-2">Compartido por: {{fav.user}}</p>
-                    <p class="mb-2">Palabras clave: {{fav.claves}}</p>
-                    <p class="h3 m-2"> {{fav.descripcion}}</p>
+<div class="container-fluid">
+    <div class="card bg-primary text-white">
 
-                </div>
+        <div class="row bg-primary text-white">
+
+            <div class="col-md-6 text-center d-flex d-flex align-items-center">
+
+                {% if fav.imagen %}
+                <img src="{{fav.imagen}}" class="img-fluid" alt="">
+                {% else %}
+                <img src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
+                {% endif %}
             </div>
-            <div class="row lower">
-                <div class="col text-right align-self-center">
-                    <a class='btn btn-outline-primary' href="{%url 'explore' %}">Volver</a>
-                    <a class='btn btn-outline-primary' target="_blank" href="{{fav.url}}">Visitar URL</a>
-                </div>
-            </div>
-            <hr>
-            <div class="card bg-dark text-white mb-3" style="max-width: 100rem;">
-                <div class="card-header">Comentarios</div>
-
-                <hr>
-                {% for comentario in comentarios %}
-                <div class="card bg-warning text-primary m-1">
-                    <div class="card-header">Creado por {{comentario.user}} - {{comentario.creado}}</div>
-                    <div class="card-body">
-                        <h3>{{comentario.comentario}}</h3>
-
+            <div class="col-md-6 info">
+                <div class="row title">
+                    <div class="col m-2">
+                        <h3 class="text-warning">{{fav.tipo}}</h3>
+                        <h1>{{fav.nombre}}</h1>
                     </div>
+                </div>
+                <p class="text-right m-2">Compartido por: {{fav.user}}</p>
+                <p class="mb-2">Palabras clave: {{fav.claves}}</p>
+                <p class="h3 m-2"> {{fav.descripcion}}</p>
+                {% if user.is_authenticated %}
+                <a class="btn btn-outline-warning" href="/mensajes/ms/{{fav.user}}">Enviar mensaje a {{fav.user}}</a>
+                {% else %}
+                <div class="alert alert-danger">
+                    <strong>Debes inicir sesion para poder enviarle mensajes al colaborador</strong> <a
+                        class='btn btn-outline-primary m-2' href="{%url 'user_login'%}">Iniciar sesion</a>
 
                 </div>
-
-
-                {% endfor %}
-                <div class="card-body">
-                    {% if user.is_authenticated %}
-
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{form}}
-
-                        <button class="btn btn-primary">
-                            Comentar
-                        </button>
-                    </form>
-
-                    {% else %}
-                    <h2>Debes iniciar sesion para poder crear comentarios =)</h2>
-
-                    {% endif %}
-                </div>
-
+                {%endif%}
             </div>
         </div>
+        <div class="row lower bg-primary text-white m-2">
+            <div class="col text-right align-self-center">
+                <a class='btn btn-outline-warning' href="{%url 'explore' %}">Volver</a>
+                <a class='btn btn-outline-warning' target="_blank" href="{{fav.url}}">Visitar URL</a>
+            </div>
+        </div>
+        <div class="sharethis-inline-share-buttons bg-primary text-white m-2"></div>
+        <div class="card bg-dark text-white mb-3">
+            <div class="card-header">Comentarios</div>
+            {% for comentario in comentarios %}
+            <div class="card bg-warning text-primary m-1">
+                <div class="card-header">Creado por {{comentario.user}} - {{comentario.creado}}</div>
+                <div class="card-body">
+                    <h3>{{comentario.comentario}}</h3>
+
+                </div>
+
+            </div>
+
+
+            {% endfor %}
+            <div class="card-body">
+                {% if user.is_authenticated %}
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <span class="d-flex justify-content-end">
+
+                        <button class="btn btn-outline-warning ">
+                            Comentar
+                        </button>
+                    </span>
+                </form>
+
+                {% else %}
+                <div class="alert alert-danger">
+                    <strong>Debes inicir sesion para poder realizar comentarios</strong> <a
+                        class='btn btn-outline-primary m-2' href="{%url 'user_login'%}">Iniciar sesion</a>
+
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
     </div>
-
-
 </div>
+
+
+
 </div>
 
 </div>

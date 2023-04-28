@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+Crear Blog
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="card bg-dark text-white mb-3">
+                <div class="card-header">Crear Blog</div>
+                <div class="card-body">
+
+                    <form method="POST" style="width:100%">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="d-flex d-flex justify-content-end">
+
+                            <button class="btn btn-outline-warning">
+                                Crear Blog
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contenido %}
