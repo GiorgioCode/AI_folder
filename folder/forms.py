@@ -27,18 +27,18 @@ class CommentForm(ModelForm):
         fields = ['comentario']
 
 
-class UserEditForm(UserChangeForm):
+class PasswordEditForm(UserChangeForm):
     password = forms.CharField(
         help_text="", widget=forms.HiddenInput(), required=False)
 
     password1 = forms.CharField(
-        label='Contraseña', widget=forms.PasswordInput, required=False)
+        label='Contraseña', widget=forms.PasswordInput, required=True)
     password2 = forms.CharField(
-        label='Repetir Contraseña', widget=forms.PasswordInput, required=False)
+        label='Repetir Contraseña', widget=forms.PasswordInput, required=True)
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['password1', 'password2']
 
     def clean_password2(self):
         password2 = self.cleaned_data['password2']
@@ -46,3 +46,12 @@ class UserEditForm(UserChangeForm):
             raise forms.ValidationError(
                 'Las contraseñas ingresadas no coinciden')
         return password2
+
+
+class UserEditForm(UserChangeForm):
+    password = forms.CharField(
+        help_text="", widget=forms.HiddenInput(), required=False)
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']

@@ -33,6 +33,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,8 +45,11 @@ INSTALLED_APPS = [
     'folder',
     "crispy_forms",
     "crispy_bootstrap5",
-    "blog"
+    "blog",
+    "accounts"
 ]
+
+SITE_ID = 1
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 

@@ -36,10 +36,11 @@
                 {% endif %}
             </div>
 
-            <p class="text-right m-2">Creado por: {{blog.autor}}</p>
+            <p class="text-right m-2">Creado por: admin</p>
             <div class="d-flex justify-content-end">
                 {% if user.is_authenticated %}
-                <a class="btn btn-outline-warning" href="/mensajes/ms/{{blog.autor}}">Enviar mensaje a {{blog.user}}</a>
+                <a class="btn btn-outline-warning" href="/mensajes/ms/admin">Enviar mensaje a
+                    admin</a>
                 {% else %}
                 <div class="alert alert-danger w-100 text-right">
                     <strong>Debes inicir sesion para poder enviarle mensajes al editor de este blog</strong> <a

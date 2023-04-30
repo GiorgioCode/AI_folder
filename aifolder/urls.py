@@ -32,7 +32,10 @@ urlpatterns = [
     path('pages/', include('blog.urls')),
     path('search/', views.search, name='search'),
     path('user_edit_profile/', views.user_edit_profile, name='user_edit_profile'),
-    path('user_profile/<user_id>/', views.user_profile, name='user_profile'),
+    path('user_edit_password/', views.user_edit_password,
+         name='user_edit_password'),
+
+    path('user_profile/<str:user>/', views.user_profile, name='user_profile'),
 
 ]
 

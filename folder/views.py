@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import *
 from blog.models import *
-from .forms import TaskForm, FavForm, CommentForm, UserEditForm
+from .forms import TaskForm, FavForm, CommentForm, UserEditForm, PasswordEditForm
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import DetailView, View, ListView
 from django.core.exceptions import PermissionDenied
@@ -250,6 +250,26 @@ def search(request):
 
 
 @login_required
+def user_edit_password(request):
+    user = request.user
+    if request.method == 'POST':
+        form = PasswordEditForm(request.POST, instance=user)
+        if form.is_valid():
+            data = form.cleaned_data
+            user.set_password(data['password1'])
+            user.save()
+            form = PasswordEditForm(instance=user)
+            return render(request, 'user_edit_password.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
+        else:
+            form = PasswordEditForm(instance=user)
+            return render(request, 'user_edit_password.html', {'form': form, 'error1': 'Por favor, verifique las contraseñas ingresadas'})
+
+    else:
+        form = PasswordEditForm(instance=user)
+        return render(request, 'user_edit_profile.html', {'form': form})
+
+
+@login_required
 def user_edit_profile(request):
     user = request.user
     if request.method == 'POST':
@@ -259,13 +279,12 @@ def user_edit_profile(request):
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.email = data['email']
-            user.set_password(data['password1'])
             user.save()
             form = UserEditForm(instance=user)
             return render(request, 'user_edit_profile.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
         else:
             form = UserEditForm(instance=user)
-            return render(request, 'user_edit_profile.html', {'form': form, 'error1': 'Por favor, verifique las contraseñas ingresadas'})
+            return render(request, 'user_edit_profile.html', {'form': form, 'error1': 'Por favor, verifique los datos ingresados'})
 
     else:
         form = UserEditForm(instance=user)
@@ -273,9 +292,6 @@ def user_edit_profile(request):
 
 
 @login_required
-def user_profile(request, user_id):
-    try:
-        user = get_object_or_404(User, id=user_id)  # ok
-        return render(request, 'user_profile.html', {'user': user})
-    except:
-        return render(request, 'user_profile.html', {'error1': True})
+def user_profile(request, user):
+    user = get_object_or_404(User, username=user)
+    return render(request, 'user_profile.html', {'profile_user': user})

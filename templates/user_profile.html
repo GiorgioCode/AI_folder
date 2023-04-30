@@ -11,29 +11,35 @@ Perfil de {{user.username}}
 {% block contenido %}
 
 <div class="container-fluid">
+    {% if request.user.is_authenticated %}
     <div class="row">
-        <div class="col">
+        <div class="col-md-4">
+            <div class="card-img-top border-warning">
+                <img src={{ profile_user.profile.image.url }} class="card-img" alt="...">
 
-            <div class="card bg-dark text-white mb-3">
-                <div class="card-header">{{user.username}}</div>
-                <div class="card-body">
-                    <h3>{{user.first_name}}</h3>
-                    <h3>{{user.last_name}}</h3>
-                    <h3>{{user.email}}</h3>
-                    {% if user.is_authenticated %}
-                    <a class="btn btn-outline-warning" href="/mensajes/ms/{{user}}">Enviar mensaje a {{user}}</a>
-                    {% else %}
-                    <div class="alert alert-danger">
-                        <strong>Debes inicir sesion para poder enviarle mensajes a {{user.username}}</strong> <a
-                            class='btn btn-outline-primary m-2' href="{%url 'user_login'%}">Iniciar sesion</a>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body border-white">
+                <h3 class="card-title text-white">{{ profile_user.first_name }} {{ profile_user.last_name }}</h3>
+                <h5 class="card-title text-warning">@{{ profile_user.username | upper }}</h5>
+                <small class="text-white"> {{ profile_user.profile.location }}</small>
+                <p class="card-text mt-3 text-white">{{ profile_user.profile.bio }}</p>
 
-                    </div>
-                    {%endif%}
+                <strong class="card-text mt-3 text-white">Intereses:</strong> <br>
 
-                </div>
+                {% for interest in profile_user.profile.interests.all %}
+                <span class="badge bg-secondary  mt-3 text-white bg-black border-white">
+                    {{ interest.name | upper}}</span>
+                {% endfor %}
+
             </div>
         </div>
     </div>
+    {% else %}
+    <h4>Título cualquiera</h4>
+    <p>{% lorem %}</p>
+    {% endif %}
 </div>
 
 
