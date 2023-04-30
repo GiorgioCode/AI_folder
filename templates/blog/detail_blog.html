@@ -36,7 +36,8 @@
                 {% endif %}
             </div>
 
-            <p class="text-right m-2">Creado por: admin</p>
+            <p class="text-right m-2">Creado por: <a class="btn btn-outline-warning" href="/user_profile/admin">
+                    admin</a></p>
             <div class="d-flex justify-content-end">
                 {% if user.is_authenticated %}
                 <a class="btn btn-outline-warning" href="/mensajes/ms/admin">Enviar mensaje a

@@ -48,9 +48,3 @@ class Comments(models.Model):
 
     def __str__(self):
         return f'{self.comentario} en {self.fav} de {self.user}'
-
-
-class Avatar(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(
-        default='users/robot_avatar.png', upload_to='avatares', null=True, blank=True)

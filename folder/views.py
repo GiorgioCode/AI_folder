@@ -266,11 +266,11 @@ def user_edit_password(request):
 
     else:
         form = PasswordEditForm(instance=user)
-        return render(request, 'user_edit_profile.html', {'form': form})
+        return render(request, 'user_edit_password.html', {'form': form})
 
 
 @login_required
-def user_edit_profile(request):
+def user_edit_account(request):
     user = request.user
     if request.method == 'POST':
         form = UserEditForm(request.POST, instance=user)
@@ -281,17 +281,20 @@ def user_edit_profile(request):
             user.email = data['email']
             user.save()
             form = UserEditForm(instance=user)
-            return render(request, 'user_edit_profile.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
+            return render(request, 'user_edit_account.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
         else:
             form = UserEditForm(instance=user)
-            return render(request, 'user_edit_profile.html', {'form': form, 'error1': 'Por favor, verifique los datos ingresados'})
+            return render(request, 'user_edit_account.html', {'form': form, 'error1': 'Por favor, verifique los datos ingresados'})
 
     else:
         form = UserEditForm(instance=user)
-        return render(request, 'user_edit_profile.html', {'form': form})
+        return render(request, 'user_edit_account.html', {'form': form})
 
 
 @login_required
 def user_profile(request, user):
-    user = get_object_or_404(User, username=user)
-    return render(request, 'user_profile.html', {'profile_user': user})
+    try:
+        user = get_object_or_404(User, username=user)
+        return render(request, 'user_profile.html', {'profile_user': user})
+    except:
+        return render(request, 'user_profile.html', {'error1': True})

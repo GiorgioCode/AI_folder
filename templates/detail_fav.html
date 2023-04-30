@@ -31,7 +31,9 @@ Enlace recomendado en AI-FOLDER: {{fav.nombre}}
                         <h1>{{fav.nombre}}</h1>
                     </div>
                 </div>
-                <p class="text-right m-2">Compartido por: {{fav.user}}</p>
+                <p class="text-right m-2">Compartido por: <a class="btn btn-outline-warning"
+                        href="/user_profile/{{fav.user}}">
+                        {{fav.user}}</a></p>
                 <p class="mb-2">Palabras clave: {{fav.claves}}</p>
                 <p class="h3 m-2"> {{fav.descripcion}}</p>
                 {% if user.is_authenticated %}

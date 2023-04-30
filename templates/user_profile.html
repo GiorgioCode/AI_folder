@@ -11,6 +11,14 @@ Perfil de {{user.username}}
 {% block contenido %}
 
 <div class="container-fluid">
+    {% if error1 %}
+    <div class="alert alert-danger">
+        <strong>El perfil solicitado no existe.</strong> <a class='btn btn-outline-primary m-2'
+            href="{%url 'explore'%}">Explorar Folder</a>
+
+    </div>
+    {% else %}
+
     {% if request.user.is_authenticated %}
     <div class="row">
         <div class="col-md-4">
@@ -37,8 +45,12 @@ Perfil de {{user.username}}
         </div>
     </div>
     {% else %}
-    <h4>Título cualquiera</h4>
-    <p>{% lorem %}</p>
+    <div class="alert alert-danger">
+        <strong>Debes inicir sesion para poder acceder al perfil</strong> <a class='btn btn-outline-primary m-2'
+            href="{%url 'user_login'%}">Iniciar sesion</a>
+
+    </div>
+    {% endif %}
     {% endif %}
 </div>
 

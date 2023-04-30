@@ -7,12 +7,15 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
-    path('explore/', views.explore, name='explore'),
+    path('', views.explore, name='explore'),
     # URLS DE MANEJO DE USUARIOS
     path('user_signup/', views.user_signup, name='user_signup'),
     path('user_login/', views.user_signin, name='user_login'),
     path('user_logout/', views.user_signout, name="user_logout"),
+    path('user_edit_account/', views.user_edit_account, name='user_edit_account'),
+    path('user_edit_password/', views.user_edit_password,
+         name='user_edit_password'),
+    path('user_profile/<str:user>/', views.user_profile, name='user_profile'),
     # URLS DE TAREAS
     path('mi_tasks/', views.mi_tasks, name='mi_tasks'),
     path('mi_tasks/<int:task_id>/complete',
@@ -27,15 +30,16 @@ urlpatterns = [
     path('detail_fav/<int:fav_id>/', views.detail_fav, name='detail_fav'),
     path('detail_mifav/<int:fav_id>', views.detail_mifav, name='detail_mifav'),
     path('delete_mifav/<pk>/', views.delete_mifav.as_view(), name='delete_mifav'),
+    # ACERCA DE
     path('about/', views.about, name='about'),
+    # RAIZ DE APP DE MENSAJERIA
     path('mensajes/', include('Dm.urls')),
+    # RAIZ DE APP DE PERFILES
+    path('accounts/', include('accounts.urls')),
+    # RAIZ DE APP DE BLOG
     path('pages/', include('blog.urls')),
+    # URL BUSQUEDA
     path('search/', views.search, name='search'),
-    path('user_edit_profile/', views.user_edit_profile, name='user_edit_profile'),
-    path('user_edit_password/', views.user_edit_password,
-         name='user_edit_password'),
-
-    path('user_profile/<str:user>/', views.user_profile, name='user_profile'),
 
 ]
 

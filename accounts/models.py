@@ -12,8 +12,8 @@ class Interest(models.Model):
         verbose_name_plural = 'Intereses'
         ordering = ['name']
 
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Profile(models.Model):
@@ -30,6 +30,9 @@ class Profile(models.Model):
         verbose_name = 'Perfil'
         verbose_name_plural = 'Perfiles'
         ordering = ['-id']
+
+    def __str__(self):
+        return f'{self.user}'
 
 
 def create_user_profile(sender, instance, created, **kwargs):
