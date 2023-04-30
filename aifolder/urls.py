@@ -28,7 +28,9 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('mensajes/', include('Dm.urls')),
     path('pages/', include('blog.urls')),
-    path('search/', views.search, name='search')
+    path('search/', views.search, name='search'),
+    path('user_edit_profile/', views.user_edit_profile, name='user_edit_profile'),
+    path('user_profile/<user_id>/', views.user_profile, name='user_profile')
 ]
 
 handler404 = 'folder.views.error_404_view'

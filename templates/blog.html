@@ -99,9 +99,13 @@ AI-Folder Blog
                         <img class=" card-img-top" width="100%" height="225" src="{{blog.imagen}}" alt="" srcset="">
 
                         <div class="card-body">
-                            <p class="card-text py-4">{{blog.titulo}}</p>
-                            <small class="text-body-secondary">{{blog.fecha}}</small>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <p style='height:3rem' class="card-text">{{blog.titulo}}</p>
+                            <div class="d-flex justify-content-end align-items-center">
+                                <small class="text-body-secondary">{{blog.fecha}}</small>
+
+                            </div>
+                            <div class="d-flex justify-content-end align-items-center">
+
                                 <div class="btn-group">
                                     <a class="btn btn-outline-success" href="{%url 'detail_blog' blog.id %}">
                                         Ver mas</a>

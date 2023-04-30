@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+Editar Perfil
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="card bg-dark text-white mb-3">
+                <div class="card-header display-4">Editar Perfil de {{user}}</div>
+                {% if error1 %}
+
+                <div class="alert alert-danger">
+                    <strong>{{error1}}</strong>
+                </div>
+                {% endif %}
+                {% if mensaje1 %}
+
+                <div class="alert alert-success">
+                    <strong>{{mensaje1}}</strong>
+                </div>
+                {% endif %}
+                <div class="card-body">
+
+                    <form method="POST" style="width:100%">
+                        {% csrf_token %}
+                        {{ form |crispy }}
+                        <div class="d-flex d-flex justify-content-end">
+
+                            <button type="submit" class="btn btn-outline-warning">
+                                Actualizar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contenido %}

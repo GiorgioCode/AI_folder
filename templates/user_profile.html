@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block titulo %}
+Perfil de {{user.username}}
+{% endblock titulo %}
+
+
+
+
+{% block contenido %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+
+            <div class="card bg-dark text-white mb-3">
+                <div class="card-header">{{user.username}}</div>
+                <div class="card-body">
+                    <h3>{{user.first_name}}</h3>
+                    <h3>{{user.last_name}}</h3>
+                    <h3>{{user.email}}</h3>
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-outline-warning" href="/mensajes/ms/{{user}}">Enviar mensaje a {{user}}</a>
+                    {% else %}
+                    <div class="alert alert-danger">
+                        <strong>Debes inicir sesion para poder enviarle mensajes a {{user.username}}</strong> <a
+                            class='btn btn-outline-primary m-2' href="{%url 'user_login'%}">Iniciar sesion</a>
+
+                    </div>
+                    {%endif%}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock contenido %}

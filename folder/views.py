@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from .models import *
 from blog.models import *
-from .forms import TaskForm, FavForm, CommentForm
+from .forms import TaskForm, FavForm, CommentForm, UserEditForm
 from django.views.generic.edit import DeleteView, CreateView, UpdateView
 from django.views.generic import DetailView, View, ListView
 from django.core.exceptions import PermissionDenied
@@ -242,3 +242,32 @@ def search(request):
         else:
             Resultado = False
         return render(request, 'search.html', {"favs": favs, "blogs": blogs, 'claves': claves, 'resultado': Resultado})
+
+
+@login_required
+def user_edit_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserEditForm(request.POST, instance=user)
+        if form.is_valid():
+            data = form.cleaned_data
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+            user.email = data['email']
+            user.save()
+            form = UserEditForm(instance=user)
+            return render(request, 'user_edit_profile.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
+        else:
+            return render(request, 'user_edit_profile.html', {'error1': 'Ha ocurrido un error al actualizar los datos'})
+    else:
+        form = UserEditForm(instance=user)
+        return render(request, 'user_edit_profile.html', {'form': form})
+
+
+@login_required
+def user_profile(request, user_id):
+    try:
+        user = get_object_or_404(User, id=user_id)  # ok
+        return render(request, 'user_profile.html', {'user': user})
+    except:
+        return render(request, 'user_profile.html', {'error1': True})
