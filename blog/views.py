@@ -39,26 +39,19 @@ def detail_blog(request, blog_id):
             return render(request, 'blog/detail_blog.html', {'blog': blog, 'form': blogform, 'comentarios': comments_blog, 'error': 'Error actualizando el comentario'})
 
 
-@login_required
-def create_blog(request):
-    if request.method == "GET":
-        return render(request, 'blog/create_blog.html', {"form": BlogForm})
-    else:
-        try:
-            blogform = BlogForm(request.POST)
-            new_blog = blogform.save(commit=False)
-            new_blog.autor = request.user
-            new_blog.save()
-            return redirect('blog')
-        except ValueError:
-            return render(request, 'blog/create_blog.html', {"form": blogform, "error": "Error al crear el blog"})
-
-
 class delete_blog(DeleteView):
     model = Blog
     template_name = 'blog/delete_blog.html'
-    success_url = '/'
+    success_url = '/pages'
     context_object_name = 'blog'
+
+
+class create_blog(CreateView):
+    model = Blog
+    template_name = 'blog/create_blog.html'
+    fields = ['titulo', 'subtitulo', 'seccion',
+              'cuerpo', 'imagen', 'referencia']
+    success_url = '/pages'
 
 
 class update_blog(UpdateView):

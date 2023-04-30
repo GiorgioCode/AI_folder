@@ -30,9 +30,9 @@
             </div>
             <div class="text-center">
                 {% if blog.imagen %}
-                <img class="imagen_blog" src="{{blog.imagen}}" alt="" srcset="">
+                <img class="imagen_blog" src="{{blog.imagen.url}}" alt="" srcset="">
                 {% else %}
-                <img src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
+                <img class="imagen_blog" src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
                 {% endif %}
             </div>
 

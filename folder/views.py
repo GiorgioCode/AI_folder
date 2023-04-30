@@ -52,8 +52,13 @@ def user_signin(request):
         if user is None:
             return render(request, 'user_login.html', {'form': AuthenticationForm, 'error': True})
         else:
-            login(request, user)
-            return redirect('home')
+            try:
+                login(request, user)
+                avatar = Avatar.objects.get(user=request.user.id)
+                return render(request, 'home.html', {'url_avatar': avatar.imagen.url})
+            except:
+                login(request, user)
+                return render(request, 'home.html')
 
 
 @login_required
@@ -254,11 +259,14 @@ def user_edit_profile(request):
             user.first_name = data['first_name']
             user.last_name = data['last_name']
             user.email = data['email']
+            user.set_password(data['password1'])
             user.save()
             form = UserEditForm(instance=user)
             return render(request, 'user_edit_profile.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
         else:
-            return render(request, 'user_edit_profile.html', {'error1': 'Ha ocurrido un error al actualizar los datos'})
+            form = UserEditForm(instance=user)
+            return render(request, 'user_edit_profile.html', {'form': form, 'error1': 'Por favor, verifique las contraseñas ingresadas'})
+
     else:
         form = UserEditForm(instance=user)
         return render(request, 'user_edit_profile.html', {'form': form})

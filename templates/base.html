@@ -67,7 +67,10 @@
                         {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-warning" data-bs-toggle="dropdown" href="#"
-                                role="button" aria-haspopup="true" aria-expanded="false">{{user}}</a>
+                                role="button" aria-haspopup="true" aria-expanded="false">{% if url_avatar %}
+                                <img style="width:40px" class="bg-info rounded-circle" src="{{url_avatar}}" alt=""
+                                    srcset="">
+                                {% endif %}{{user}}</a>
                             <div class="dropdown-menu bg-warning">
                                 <a class="dropdown-item" href="{%url 'user_edit_profile'%}">Editar mis datos</a>
                                 <div class="dropdown-divider"></div>

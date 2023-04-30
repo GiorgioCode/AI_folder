@@ -22,7 +22,8 @@ Actualizar {{blog.titulo}}
                 <div class="card-header">Actualizar {{blog.titulo}}</div>
                 <div class="card-body">
 
-                    <form action="{% url 'update_blog' blog.id %}" method="POST" style="width:100%">
+                    <form action="{% url 'update_blog' blog.id %}" method="POST" style="width:100%"
+                        enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="d-flex d-flex justify-content-end">

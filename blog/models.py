@@ -21,7 +21,8 @@ class Blog(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
     autor = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
-    imagen = models.TextField(max_length=200, default="")
+    imagen = models.ImageField(
+        upload_to='imagenes_blog', null=True, blank=True)
     referencia = models.URLField(max_length=200)
 
     def __str__(self):

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,3 +143,6 @@ EMAIL_HOST_USER = 'aifolder.noreply@gmail.com'
 EMAIL_HOST_PASSWORD = 'aifolder2023'
 EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
 # https://www.youtube.com/watch?v=B3-AbVnls_8
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
