@@ -16,9 +16,6 @@ from django.http import HttpResponse, Http404, JsonResponse
 from django.db.models import Q
 
 
-def home(request):
-    return render(request, 'home.html')
-
 # Manejo de usuarios
 
 
@@ -36,7 +33,7 @@ def user_signup(request):
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()
                 login(request, user)
-                return redirect('home')
+                return redirect('explore')
             except IntegrityError:
                 return render(request, 'user_signup.html', {'form': UserCreationForm, 'error1': True})
         else:
@@ -54,17 +51,17 @@ def user_signin(request):
         else:
             try:
                 login(request, user)
-                avatar = Avatar.objects.get(user=request.user.id)
-                return render(request, 'home.html', {'url_avatar': avatar.imagen.url})
+
+                return redirect('explore')
             except:
                 login(request, user)
-                return render(request, 'home.html')
+                return redirect('explore')
 
 
 @login_required
 def user_signout(request):
     logout(request)
-    return redirect('home')
+    return redirect('explore')
 
 # Manejo de tareas
 

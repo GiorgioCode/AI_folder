@@ -42,6 +42,10 @@ Perfil de {{user.username}}
                 {% endfor %}
 
             </div>
+            <div class="d-flex d-flex  justify-content-end">
+                <a class="btn btn-outline-warning" href="/mensajes/ms/{{profile_user}}">Enviar mensaje a
+                    {{profile_user}}</a>
+            </div>
         </div>
     </div>
     {% else %}

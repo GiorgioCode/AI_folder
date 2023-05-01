@@ -19,9 +19,9 @@ Enlace recomendado en AI-FOLDER: {{fav.nombre}}
             <div class="col-md-6 text-center d-flex d-flex align-items-center">
 
                 {% if fav.imagen %}
-                <img src="{{fav.imagen}}" class="img-fluid" alt="">
+                <img width="60%" src="{{fav.imagen}}" class="img-fluid" alt="">
                 {% else %}
-                <img src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
+                <img width="30%" src="{% static 'img/sin_imagen.jpeg' %}" class="img-fluid" alt="">
                 {% endif %}
             </div>
             <div class="col-md-6 info">
