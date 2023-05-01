@@ -1,10 +1,18 @@
-# AI-Folder
+![Header](https://raw.githubusercontent.com/GiorgioCode/AI_folder/main/readme/header_aifolder.jpg)
 
 ## Desarrollado por Jorge Angel Paez para cumplir con los requisitos del Proyecto Final del Curso de Python/Django de CODERHOUSE.
 
 ---
 
+# Video de presentacion y demostración de uso:
+
+## [![VER EJEMPLO](https://firebasestorage.googleapis.com/v0/b/gamex-store.appspot.com/o/ver_youtube.png?alt=media&token=ffe34a3d-e5d2-420d-9ec7-cc316b91452e)](https://www.youtube.com/watch?v=jCBkcUTqzg4)
+
 ---
+
+# Pruebas:
+
+https://docs.google.com/spreadsheets/d/1B42HFceN3mi7AACvQMO-wMinkV0Rx1pj/edit?usp=sharing&ouid=114877593899394392541&rtpof=true&sd=true
 
 ---
 
