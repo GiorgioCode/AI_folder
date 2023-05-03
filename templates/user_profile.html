@@ -23,8 +23,11 @@ Perfil de {{user.username}}
     <div class="row">
         <div class="col-md-4">
             <div class="card-img-top border-warning">
+                {% if user.profile.image %}
                 <img src={{ profile_user.profile.image.url }} class="card-img" alt="...">
-
+                {% else %}
+                <img src="{% static 'img/robot_avatar.png' %}" class="card-img" alt="...">
+                {% endif %}
             </div>
         </div>
         <div class="col-md-8">

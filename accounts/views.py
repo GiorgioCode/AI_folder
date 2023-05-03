@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from .forms import ProfileEditForm
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 # Create your views here.
 
 
@@ -19,10 +21,15 @@ class user_edit_profile(UpdateView):
 def user_edit_profile(request):
     usuario = request.user
     if request.method == 'POST':
-        form = ProfileEditForm(request.POST, instance=usuario.profile)
+        form = ProfileEditForm(
+            request.POST, request.FILES, instance=usuario.profile)
         if form.is_valid():
             data = form.cleaned_data
-            usuario.profile.image = data['image']
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+                filename = default_storage.save(
+                    image.name, ContentFile(image.read()))
+                usuario.profile.image = filename
             usuario.profile.interests.set(data['interests'])
             usuario.profile.location = data['location']
             usuario.profile.bio = data['bio']

@@ -65,8 +65,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-warning" data-bs-toggle="dropdown" href="#"
                                 role="button" aria-haspopup="true" aria-expanded="false">
-
-
+                                {% if user.profile.image %}
+                                <img style="width:40px" class="bg-info rounded-circle" src="{{user.profile.image.url}}"
+                                    alt="" srcset="">
+                                {% endif %}
                                 {{user}}</a>
                             <div class="dropdown-menu bg-warning">
                                 <a class="dropdown-item" href="{%url 'mi_profile'%}">Mi Perfil</a>
