@@ -20,7 +20,7 @@ class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name='profile')
     image = models.ImageField(
-        default='users/robot_avatar.png', upload_to='users/')
+        upload_to='users', default='users/robot_avatar.png', null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     bio = models.TextField(max_length=300, null=True, blank=True)
     interests = models.ManyToManyField(

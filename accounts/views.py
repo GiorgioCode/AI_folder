@@ -22,10 +22,10 @@ def user_edit_profile(request):
         form = ProfileEditForm(request.POST, instance=usuario.profile)
         if form.is_valid():
             data = form.cleaned_data
-            usuario.image = data['image']
-            usuario.interests = data['interests']
-            usuario.location = data['location']
-            usuario.bio = data['bio']
+            usuario.profile.image = data['image']
+            usuario.profile.interests.set(data['interests'])
+            usuario.profile.location = data['location']
+            usuario.profile.bio = data['bio']
             usuario.save()
             form = ProfileEditForm(instance=usuario.profile)
             return render(request, 'accounts/user_edit_profile.html', {'form': form, 'mensaje1': 'Se han actualizado los datos correctamente.'})
