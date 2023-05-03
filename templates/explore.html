@@ -10,31 +10,31 @@ Explorar
     <div class="row">
         <div class="col-lg-9 col-sm-12">
             {% if webs %}
-            <div class="card border-white bg-primary text-white mb-3">
+            <div class="card border-white bg-primary text-white mb-3 justify-content-center">
                 <div class="card-header">Webs</div>
                 <div class="card-body">
-                    <table class="table table-dark">
+                    <table class="table  table-fluid  table-dark">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre:</th>
-                                <th scope="col">Compartido por:</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-center">Nombre:</th>
+                                <th scope="col" class="text-center">Compartido por:</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for web in webs %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if web.imagen %}
                                     <img src="{{web.imagen}}" style="width:60px" alt="">
                                     {% else %}
                                     <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
-                                <td>{{web.nombre}}</td>
-                                <td>{{web.user}}</td>
-                                <td>
+                                <td class="text-center">{{web.nombre}}</td>
+                                <td class="text-center">{{web.user}}</td>
+                                <td class="text-center">
                                     <a class='btn btn-outline-warning' href="{%url 'detail_fav' web.id %}">Ver
                                         mas</a>
                                 </td>
@@ -47,31 +47,31 @@ Explorar
             </div>
             {% endif %}
             {% if aplicaciones %}
-            <div class="card border-white bg-primary text-white mb-3">
+            <div class="card border-white bg-primary text-white mb-3  justify-content-center">
                 <div class="card-header">Aplicaciones</div>
                 <div class="card-body">
-                    <table class="table table-dark">
+                    <table class="table  table-fluid table-dark">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre:</th>
-                                <th scope="col">Compartido por:</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-center">Nombre:</th>
+                                <th scope="col" class="text-center">Compartido por:</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for aplicacion in aplicaciones %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if aplicacion.imagen %}
                                     <img src="{{aplicacion.imagen}}" style="width:60px" alt="">
                                     {% else %}
                                     <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
-                                <td>{{aplicacion.nombre}}</td>
-                                <td>{{aplicacion.user}}</td>
-                                <td>
+                                <td class="text-center">{{aplicacion.nombre}}</td>
+                                <td class="text-center">{{aplicacion.user}}</td>
+                                <td class="text-center">
                                     <a class='btn btn-outline-warning' href="{%url 'detail_fav' aplicacion.id %}">Ver
                                         mas</a>
                                 </td>
@@ -84,31 +84,31 @@ Explorar
             </div>
             {% endif %}
             {% if cheatsheets %}
-            <div class="card border-white bg-primary text-white mb-3">
+            <div class="card border-white bg-primary text-white mb-3  justify-content-center">
                 <div id='cheatsheets' class="card-header">Cheatsheets</div>
                 <div class="card-body">
-                    <table class="table table-dark">
+                    <table class="table  table-fluid table-dark">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre:</th>
-                                <th scope="col">Compartido por:</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-center">Nombre:</th>
+                                <th scope="col" class="text-center">Compartido por:</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for cheatsheet in cheatsheets %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if cheatsheet.imagen %}
                                     <img src="{{cheatsheet.imagen}}" style="width:60px" alt="">
                                     {% else %}
                                     <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
-                                <td>{{cheatsheet.nombre}}</td>
-                                <td>{{cheatsheet.user}}</td>
-                                <td>
+                                <td class="text-center">{{cheatsheet.nombre}}</td>
+                                <td class="text-center">{{cheatsheet.user}}</td>
+                                <td class="text-center">
                                     <a class='btn btn-outline-warning' href="{%url 'detail_fav' cheatsheet.id %}">Ver
                                         mas</a>
                                 </td>
@@ -121,31 +121,31 @@ Explorar
             </div>
             {% endif %}
             {% if apuntes %}
-            <div class="card border-white bg-primary text-white mb-3">
+            <div class="card border-white bg-primary text-white mb-3  justify-content-center">
                 <div id='apuntes' class="card-header">Apuntes</div>
                 <div class="card-body">
                     <table class="table table-dark">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre:</th>
-                                <th scope="col">Compartido por:</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-center">Nombre:</th>
+                                <th scope="col" class="text-center">Compartido por:</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for apunte in apuntes %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if apunte.imagen %}
                                     <img src="{{apunte.imagen}}" style="width:60px" alt="">
                                     {% else %}
                                     <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
-                                <td>{{apunte.nombre}}</td>
-                                <td>{{apunte.user}}</td>
-                                <td>
+                                <td class="text-center">{{apunte.nombre}}</td>
+                                <td class="text-center">{{apunte.user}}</td>
+                                <td class="text-center">
                                     <a class='btn btn-outline-warning' href="{%url 'detail_fav' apunte.id %}">Ver
                                         mas</a>
                                 </td>
@@ -157,31 +157,31 @@ Explorar
             </div>
             {% endif %}
             {% if modelos %}
-            <div class="card border-white bg-primary text-white mb-3">
+            <div class="card border-white bg-primary text-white mb-3 d-flex d-flex justify-content-center">
                 <div id='modelos' class="card-header">Modelos</div>
                 <div class="card-body">
-                    <table class="table table-dark">
+                    <table class="table table-fluid table-dark">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre:</th>
-                                <th scope="col">Compartido por:</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-center">Nombre:</th>
+                                <th scope="col" class="text-center">Compartido por:</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for modelo in modelos %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if modelo.imagen %}
                                     <img src="{{modelo.imagen}}" style="width:60px" alt="">
                                     {% else %}
                                     <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
-                                <td>{{modelo.nombre}}</td>
-                                <td>{{modelo.user}}</td>
-                                <td>
+                                <td class="text-center">{{modelo.nombre}}</td>
+                                <td class="text-center">{{modelo.user}}</td>
+                                <td class="text-center">
                                     <a class='btn btn-outline-warning' href="{%url 'detail_fav' modelo.id %}">Ver
                                         mas</a>
                                 </td>
@@ -193,31 +193,31 @@ Explorar
             </div>
             {% endif %}
             {% if varios %}
-            <div class="card border-white bg-primary text-white mb-3">
+            <div class="card border-white bg-primary text-white mb-3  justify-content-center">
                 <div id='varios' class="card-header">Varios</div>
                 <div class="card-body">
-                    <table class="table table-dark">
+                    <table class="table table-fluid table-dark">
                         <thead>
                             <tr>
-                                <th scope="col"></th>
-                                <th scope="col">Nombre:</th>
-                                <th scope="col">Compartido por:</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center"></th>
+                                <th scope="col" class="text-center">Nombre:</th>
+                                <th scope="col" class="text-center">Compartido por:</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in varios %}
                             <tr>
-                                <td>
+                                <td class="text-center">
                                     {% if item.imagen %}
                                     <img src="{{item.imagen}}" style="width:60px" alt="">
                                     {% else %}
                                     <img src="{% static 'img/sin_imagen.jpeg' %}" style="width:60px" alt="">
                                     {% endif %}
                                 </td>
-                                <td>{{item.nombre}}</td>
-                                <td>{{item.user}}</td>
-                                <td>
+                                <td class="text-center">{{item.nombre}}</td>
+                                <td class="text-center">{{item.user}}</td>
+                                <td class="text-center">
                                     <a class='btn btn-outline-warning' href="{%url 'detail_fav' item.id %}">Ver
                                         mas</a>
                                 </td>
