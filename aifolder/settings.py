@@ -154,12 +154,6 @@ LOGIN_URL = '/user_login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 25
-EMAIL_HOST_USER = 'aifolder.noreply@gmail.com'
-EMAIL_HOST_PASSWORD = ''
-EMAIL_BACKEND = 'django.core.mail.backend.smtp.EmailBackend'
 # https://www.youtube.com/watch?v=B3-AbVnls_8
 
 MEDIA_URL = '/media/'
