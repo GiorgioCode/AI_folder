@@ -6,4 +6,4 @@ from django.forms import forms
 class ProfileEditForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['image', 'interests', 'location', 'bio']
+        fields = ['image', 'location', 'bio']
